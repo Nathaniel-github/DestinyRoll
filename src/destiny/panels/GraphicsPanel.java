@@ -1,3 +1,5 @@
+package destiny.panels;
+import destiny.graphicslib.FadeVideo;
 import processing.core.PApplet;
 import processing.video.Movie;
 

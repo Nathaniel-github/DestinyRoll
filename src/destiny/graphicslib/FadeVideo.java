@@ -1,3 +1,4 @@
+package destiny.graphicslib;
 import processing.core.PApplet;
 import processing.video.Movie;
 

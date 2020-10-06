@@ -1,3 +1,4 @@
+package destiny.graphicslib;
 import processing.core.PApplet;
 
 public class FadeImage extends Fader {
