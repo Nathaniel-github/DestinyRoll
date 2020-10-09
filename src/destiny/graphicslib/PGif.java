@@ -30,16 +30,8 @@ public class PGif {
 	
 	public PGif(int x, int y, String pathName) {
 		
-		ImageReader reader = (ImageReader)ImageIO.getImageReadersByFormatName("gif").next();
-		
 		try {
-			reader.setInput(ImageIO.createImageInputStream(new File(pathName)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			frames = readGIF(reader);
+			frames = readGIF(pathName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -49,6 +41,14 @@ public class PGif {
 	}
 	
 	public void draw(PApplet window) {
+		
+		advanceFrame();
+		
+		window.image(new PImage(frames[frameCount].getImage()), x, y);
+		
+	}
+	
+	private void advanceFrame() {
 		
 		if (!firstDraw) {
 			
@@ -70,12 +70,25 @@ public class PGif {
 			
 		}
 		
-		window.image(new PImage(frames[frameCount].getImage()), x, y);
+	}
+	
+	public void setCoordinates(int xCord, int yCord) {
+		
+		x = xCord;
+		y = yCord;
 		
 	}
 	
-	private ImageFrame[] readGIF(ImageReader reader) throws IOException {
-	    ArrayList<ImageFrame> frames = new ArrayList<ImageFrame>(2);
+	private ImageFrame[] readGIF(String pathName) throws IOException {
+	    ArrayList<ImageFrame> frames = new ArrayList<ImageFrame>();
+	    
+	    ImageReader reader = (ImageReader)ImageIO.getImageReadersByFormatName("gif").next();
+		
+		try {
+			reader.setInput(ImageIO.createImageInputStream(new File(pathName)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	    int width = -1;
 	    int height = -1;
