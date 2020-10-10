@@ -1,11 +1,10 @@
 package destiny.panels;
 
-import destiny.graphicslib.FadeVideo;
-import destiny.graphicslib.PGif;
+import destiny.core.*;
 import processing.core.PApplet;
 import processing.video.Movie;
 
-public class GraphicsPanel extends PApplet {
+public class SuperPanel extends PApplet {
 	
 	FadeVideo myMovie;
 	PGif test;
@@ -13,14 +12,13 @@ public class GraphicsPanel extends PApplet {
 	public void setup() {
 		myMovie = new FadeVideo(this, "res/titleScreen/Gurenge.mp4");
 		myMovie.loop();
-		test = new PGif(20, 20, "res/test.gif");
+		test = new PGif(100, 20, "res/test.gif");
 	}
 
 	public void draw() {
-		
+		this.clear();
 		myMovie.draw(this);
 		test.draw(this);
-		
 	}
 	
 	public void movieEvent(Movie m) {

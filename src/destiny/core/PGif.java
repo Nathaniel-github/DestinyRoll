@@ -1,4 +1,4 @@
-package destiny.graphicslib;
+package destiny.core;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -21,22 +21,41 @@ import processing.core.PImage;
 
 public class PGif {
 	
-	private ImageFrame[] frames;
+	private ImageFrame[] frameData;
+	private PImage[] imageFrames;
 	private int frameCount;
 	private long lastTimeStamp;
 	private int x;
 	private int y;
-	private boolean firstDraw;
+	private int width;
+	private int height;
+	private boolean firstDraw = true;
+	private float scale;
 	
 	public PGif(int x, int y, String pathName) {
 		
 		try {
-			frames = readGIF(pathName);
+			frameData = readGIF(pathName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
+		imageFrames = new PImage[frameData.length];
+		
+		for (int i = 0; i < frameData.length; i ++) {
+			
+			imageFrames[i] = new PImage(frameData[i].getImage());
+			
+		}
+		
+		this.x = x;
+		this.y = y;
+		
+		width = imageFrames[0].width;
+		height = imageFrames[0].height;
+		
 		frameCount = 0;
+		scale = 1;
 		
 	}
 	
@@ -44,7 +63,16 @@ public class PGif {
 		
 		advanceFrame();
 		
-		window.image(new PImage(frames[frameCount].getImage()), x, y);
+		window.pushMatrix();
+
+		double midOfImageX = (x + imageFrames[frameCount].width/2.0);
+		double midOfImageY = (y + imageFrames[frameCount].width/2.0);
+		window.translate((float)(midOfImageX), (float)(midOfImageY));
+		
+		this.resize((int)(width * scale), (int)(height * scale));
+		window.image(imageFrames[frameCount], (float)(x - midOfImageX), (float)(y - midOfImageY));
+		
+		window.popMatrix();
 		
 	}
 	
@@ -53,7 +81,7 @@ public class PGif {
 		if (!firstDraw) {
 			
 			int lastFrame = frameCount;
-			frameCount += (((System.nanoTime() - lastTimeStamp) / 10000000) / frames[frameCount].getDelay());
+			frameCount += (((System.nanoTime() - lastTimeStamp) / 10000000) / frameData[frameCount].getDelay());
 			if (lastFrame != frameCount)
 				lastTimeStamp = System.nanoTime();
 			
@@ -64,7 +92,7 @@ public class PGif {
 			
 		}
 		
-		if (frameCount >= frames.length || frameCount < 0) {
+		if (frameCount >= frameData.length || frameCount < 0) {
 			
 			frameCount = 0;
 			
@@ -79,6 +107,30 @@ public class PGif {
 		
 	}
 	
+	public void translate(int xShift, int yShift) {
+		
+		x += xShift;
+		y += yShift;
+		
+	}
+	
+	public void resize(int w, int h) {
+		
+		for (int i = 0;i < imageFrames.length; i ++) {
+			
+			imageFrames[i].resize(w, h);
+			
+		}
+		
+	}
+	
+	public void setScale(float s) {
+		
+		scale = s;
+		
+	}
+	
+	// This method was mainly just taken from an example piece of code in Stack Overflow
 	private ImageFrame[] readGIF(String pathName) throws IOException {
 	    ArrayList<ImageFrame> frames = new ArrayList<ImageFrame>();
 	    
