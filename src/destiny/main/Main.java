@@ -3,7 +3,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import destiny.panels.SuperPanel;
+import destiny.panels.Window;
 import processing.awt.PSurfaceAWT;
 import processing.core.PApplet;
 
@@ -11,7 +11,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		SuperPanel drawing = new SuperPanel();
+		Window drawing = new Window();
 		PApplet.runSketch(new String[]{""}, drawing);
 		PSurfaceAWT surf = (PSurfaceAWT) drawing.getSurface();
 		PSurfaceAWT.SmoothCanvas canvas = (PSurfaceAWT.SmoothCanvas) surf.getNative();

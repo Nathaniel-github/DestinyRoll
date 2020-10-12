@@ -4,7 +4,7 @@ import destiny.core.*;
 import processing.core.PApplet;
 import processing.video.Movie;
 
-public class SuperPanel extends PApplet {
+public class Window extends PApplet {
 	
 	FadeVideo myMovie;
 	PGif test;
@@ -12,7 +12,9 @@ public class SuperPanel extends PApplet {
 	public void setup() {
 		myMovie = new FadeVideo(this, "res/titleScreen/Gurenge.mp4");
 		myMovie.loop();
-		test = new PGif(100, 20, "res/test.gif");
+		test = new PGif(100, 100, "res/test.gif");
+		test.stopLooping();
+		test.playOnce();
 	}
 
 	public void draw() {
@@ -24,5 +26,9 @@ public class SuperPanel extends PApplet {
 	public void movieEvent(Movie m) {
 		m.read();
 	}
-
+	
+	public void mousePressed() {
+		EventHandler.notifyClickables(this);
+	}
+	
 }

@@ -31,6 +31,8 @@ public class PGif {
 	private int height;
 	private boolean firstDraw = true;
 	private float scale;
+	private boolean looping = true;
+	private boolean tempPlaying = false;
 	
 	public PGif(int x, int y, String pathName) {
 		
@@ -78,6 +80,9 @@ public class PGif {
 	
 	private void advanceFrame() {
 		
+		if ((!looping && frameCount == 0) && !tempPlaying)
+			return;
+		
 		if (!firstDraw) {
 			
 			int lastFrame = frameCount;
@@ -95,6 +100,7 @@ public class PGif {
 		if (frameCount >= frameData.length || frameCount < 0) {
 			
 			frameCount = 0;
+			tempPlaying = false;
 			
 		}
 		
@@ -116,6 +122,9 @@ public class PGif {
 	
 	public void resize(int w, int h) {
 		
+		if (w == width && h == height)
+			return;
+		
 		for (int i = 0;i < imageFrames.length; i ++) {
 			
 			imageFrames[i].resize(w, h);
@@ -127,6 +136,33 @@ public class PGif {
 	public void setScale(float s) {
 		
 		scale = s;
+		
+	}
+	
+	public void stopLooping() {
+		
+		looping  = false;
+		
+	}
+	
+	public void startLooping() {
+		
+		looping = true;
+		lastTimeStamp = System.nanoTime();
+		
+	}
+	
+	public void playOnce() {
+		
+		restart();
+		
+		tempPlaying = true;
+		
+	}
+	
+	public void restart() {
+		
+		frameCount = 0;
 		
 	}
 	

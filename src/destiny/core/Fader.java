@@ -2,21 +2,34 @@ package destiny.core;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public abstract class Fader {
+abstract class Fader {
 	
 	protected PImage myImage;
 	
-	protected float tint;
-	protected float targetTint;
-	protected float fadeSpeed;
+	private float tint;
+	private float targetTint;
+	private float fadeSpeed;
 	
-	protected int x;
-	protected int y;
-	protected int width;
-	protected int height;
+	private int x;
+	private int y;
+	private int width;
+	private int height;
 	
-	protected boolean fullScreen;
+	private boolean fullScreen;
 	private boolean isFading = true;
+	
+	public Fader(float startTint, float targetTint, float fadeSpeed, int xCord, int yCord, int width, int height, boolean fullScreen) {
+		
+		tint = startTint;
+		this.targetTint = targetTint;
+		this.fadeSpeed = fadeSpeed;
+		x = xCord;
+		y = yCord;
+		this.width = width;
+		this.height = height;
+		this.fullScreen = fullScreen;
+		
+	}
 	
 	public void draw(PApplet window) {
 		
@@ -31,7 +44,7 @@ public abstract class Fader {
 		
 	}
 	
-	private void tick() {
+	protected void tick() {
 		
 		if (!isFading)
 			return;
@@ -73,7 +86,14 @@ public abstract class Fader {
 		
 	}
 	
-	public void setTargetFade(float target) {
+	public void setTint(float tint) {
+		
+		this.tint = tint;
+		setTargetTint(tint);
+		
+	}
+	
+	public void setTargetTint(float target) {
 		
 		targetTint = target;
 		isFading = true;
@@ -114,5 +134,40 @@ public abstract class Fader {
 		
 	}
 
+	public float getTint() {
+		
+		return tint;
+		
+	}
+	
+	public int getWidth() {
+		
+		return width;
+		
+	}
+	
+	public int getHeight() {
+		
+		return height;
+		
+	}
+	
+	public boolean isFullScreen() {
+		
+		return fullScreen;
+		
+	}
+	
+	public int getX() {
+		
+		return x;
+		
+	}
+	
+	public int getY() {
+			
+		return y;
+		
+	}
 	
 }

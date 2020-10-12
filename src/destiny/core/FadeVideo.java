@@ -6,38 +6,22 @@ public class FadeVideo extends Fader {
 	
 	public FadeVideo(PApplet window, String pathname) {
 		
+		super(0, 255, 0.2f, 0, 0, 0 ,0, true);
 		myImage = new Movie(window, pathname);
-		tint = 0;
-		this.targetTint = 255;
-		this.fadeSpeed = 0.2f;
-		x = 0;
-		y = 0;
-		fullScreen = true;
 		
 	}
 	
 	public FadeVideo(PApplet window, String pathname, float startTint, float targetTint, float fadeSpeed, int xCord, int yCord, int width, int height) {
 		
+		super(startTint, targetTint, fadeSpeed, xCord, yCord, width, height, false);
 		myImage = new Movie(window, pathname);
-		tint = startTint;
-		this.targetTint = targetTint;
-		this.fadeSpeed = fadeSpeed;
-		x = xCord;
-		y = yCord;
-		this.width = width;
-		this.height = height;
 		
 	}
 	
 	public FadeVideo(PApplet window, String pathname, float startTint, float targetTint, float fadeSpeed, int xCord, int yCord) {
 		
+		super(startTint, targetTint, fadeSpeed, xCord, yCord, 0 ,0, true);
 		myImage = new Movie(window, pathname);
-		tint = startTint;
-		this.targetTint = targetTint;
-		this.fadeSpeed = fadeSpeed;
-		x = xCord;
-		y = yCord;
-		fullScreen = true;
 		
 	}
 	
