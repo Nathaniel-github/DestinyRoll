@@ -2,6 +2,7 @@ package destiny.core;
 
 interface ClickEvent {
 	
-	public boolean alert(Event e);
+	public boolean click(Event e);
+	public boolean released(Event e);
 
 }

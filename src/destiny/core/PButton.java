@@ -9,6 +9,8 @@ public class PButton implements ClickEvent {
 	private PShape collider;
 	private Runnable exec;
 	private boolean hasTexture;
+	private boolean listenOnClick;
+	private boolean isClicked = false;
 	
 	public PButton (PShape collider, Runnable code) {
 		
@@ -16,6 +18,17 @@ public class PButton implements ClickEvent {
 		this.exec = code;
 		
 		hasTexture = false;
+		listenOnClick = false;
+		
+	}
+	
+	public PButton (PShape collider, Runnable code, boolean onClick) {
+		
+		this.collider = collider; 
+		this.exec = code;
+		
+		hasTexture = false;
+		listenOnClick = onClick;
 		
 	}
 	
@@ -26,6 +39,18 @@ public class PButton implements ClickEvent {
 		
 		collider.setTexture(texture);
 		hasTexture = true;
+		listenOnClick = false;
+		
+	}
+	
+	public PButton (PShape collider, Runnable code, PImage texture, boolean onClick) {
+		
+		this.collider = collider; 
+		this.exec = code;
+		
+		collider.setTexture(texture);
+		hasTexture = true;
+		listenOnClick = onClick;
 		
 	}
 	
@@ -38,17 +63,35 @@ public class PButton implements ClickEvent {
 		};
 		
 		hasTexture = false;
+		listenOnClick = false;
 		
 	}
 
 	@Override
-	public boolean alert(Event e) {
+	public boolean click(Event e) {
 		
 		if (collider.contains(e.getMouseX(), e.getMouseY())) {
-			new Thread(exec).start();
+			if (listenOnClick)
+				new Thread(exec).start();
+			isClicked = true;
 			return true;
 		}
 		return false;
+		
+	}
+	
+	@Override
+	public boolean released(Event e) {
+		
+		if (collider.contains(e.getMouseX(), e.getMouseY())) {
+			if (!listenOnClick && isClicked)
+				new Thread(exec).start();
+			isClicked = false;
+			return true;
+		}
+		isClicked = false;
+		return false;
+		
 	}
 	
 	public void draw(PApplet window) {
@@ -61,6 +104,12 @@ public class PButton implements ClickEvent {
 	public void addListener() {
 		
 		EventHandler.addClickable(this);
+		
+	}
+	
+	public void setOnClick(boolean onClick) {
+		
+		listenOnClick = onClick;
 		
 	}
 	
@@ -89,7 +138,5 @@ public class PButton implements ClickEvent {
 		EventHandler.addClickable(this);
 		
 	}
-	
-	
 
 }

@@ -5,22 +5,19 @@ import processing.core.PApplet;
 import processing.video.Movie;
 
 public class Window extends PApplet {
-	
-	FadeVideo myMovie;
-	PGif test;
 
 	public void setup() {
-		myMovie = new FadeVideo(this, "res/titleScreen/Gurenge.mp4");
-		myMovie.loop();
-		test = new PGif(100, 100, "res/test.gif");
-		test.stopLooping();
-		test.playOnce();
+		
+		// Instantiate your screens here and add them to the SceenManager
+		// You can start with the ScreenManager.setScreen(screenName, screen);
+		// Then add screens that you will use later with ScreenManager.addScreen(screenName, screen);
+		// You can switch to these screens on events that you want to monitor using -
+		// ScreenManager.setCurrentScreenByName(screenName);
+		
 	}
 
 	public void draw() {
-		this.clear();
-		myMovie.draw(this);
-		test.draw(this);
+		ScreenManager.drawCurrentScreen(this);
 	}
 	
 	public void movieEvent(Movie m) {
@@ -29,6 +26,14 @@ public class Window extends PApplet {
 	
 	public void mousePressed() {
 		EventHandler.notifyClickables(this);
+	}
+	
+	public void mouseReleased() {
+		EventHandler.notifyRelease(this);
+	}
+	
+	public void mouseDragged() {
+		EventHandler.notifyDraggables(this);
 	}
 	
 }
