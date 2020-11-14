@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="lib/jna.jar"/>
 	<classpathentry kind="lib" path="lib/video.jar"/>
 	<classpathentry kind="lib" path="lib/processing_core.jar"/>
+	<classpathentry kind="lib" path="lib/kryonet-2.21-all.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
