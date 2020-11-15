@@ -34,7 +34,7 @@ abstract class Fader {
 	public void draw(PApplet window) {
 		
 		window.pushStyle();
-		window.tint((float)tint);
+		window.tint(tint);
 		int width = fullScreen ? window.width : this.width;
 		int height = fullScreen ? window.height : this.height;
 		window.image(myImage, x, y, width, height);

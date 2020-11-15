@@ -1,24 +1,18 @@
 package destiny.net;
 
 public class ClientPacket {
-
-	public int px, py;
-	public String keyCode;
 	
-	public ClientPacket(String code, int px, int py) {
-		
-		keyCode = code;
-		this.px = px;
-		this.py = py;
+	public ClientPacket(String stuff) {
 		
 	}
 	
-	public ClientPacket() {
-		
-	}
+	// This no args constructor is a MUST. It is required in order to deserialize the packet properly
+	public ClientPacket() {}
 	
+	@Override
 	public String toString() {
-		return keyCode + ", " + px + ", " + py;	
+		return null;
+		// TODO
 	}
 	
 }
