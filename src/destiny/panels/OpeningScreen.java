@@ -19,7 +19,6 @@ public class OpeningScreen implements Screen {
 	
 	@Override
 	public void setup() {
-		
 		corp.play();
 		background.setCoords(0, 0);
 		background.setDimensions(1280, 720);
