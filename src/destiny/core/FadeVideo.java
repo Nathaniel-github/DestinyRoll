@@ -75,4 +75,10 @@ public class FadeVideo extends Fader {
 		
 	}
 	
+	public boolean isPlaying() {
+		
+		return ((Movie)myImage).isPlaying();
+		
+	}
+	
 }
