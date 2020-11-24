@@ -80,7 +80,7 @@ public class PGif {
 	
 	private void advanceFrame() {
 		
-		if ((!looping && frameCount == 0) && !tempPlaying)
+		if (isFinished())
 			return;
 		
 		if (!firstDraw) {
@@ -120,6 +120,12 @@ public class PGif {
 		
 	}
 	
+	public boolean isFinished() {
+		
+		return  (!looping && frameCount == 0) && !tempPlaying;
+		
+	}
+	
 	public void resize(int w, int h) {
 		
 		if (w == width && h == height)
@@ -142,12 +148,14 @@ public class PGif {
 	public void stopLooping() {
 		
 		looping  = false;
+		tempPlaying = true;
 		
 	}
 	
 	public void startLooping() {
 		
 		looping = true;
+		tempPlaying = false;
 		lastTimeStamp = System.nanoTime();
 		
 	}
