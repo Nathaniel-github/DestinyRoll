@@ -107,7 +107,7 @@ public class PButton implements ClickEvent {
 		
 	}
 	
-	public void setOnClick(boolean onClick) {
+	public void listenOnClick(boolean onClick) {
 		
 		listenOnClick = onClick;
 		
@@ -127,15 +127,9 @@ public class PButton implements ClickEvent {
 		
 	}
 	
-	public void turnOffListening() {
+	public void removeListener() {
 		
 		EventHandler.removeClickable(this);
-		
-	}
-	
-	public void turnOnListening() {
-		
-		EventHandler.addClickable(this);
 		
 	}
 

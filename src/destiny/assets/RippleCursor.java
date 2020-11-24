@@ -9,7 +9,7 @@ public class RippleCursor {
 	
 	public RippleCursor() {
 		
-		test = new PGif(100, 100, "res/test.gif");
+		test = new PGif(100, 100, "res/generalAssets/test.gif");
 		
 		test.setScale(0.35f);
 		test.overrideDelay(1.6);
