@@ -1,6 +1,7 @@
 package destiny.panels;
 
 import destiny.core.*;
+import destiny.assets.*;
 import processing.core.PApplet;
 import processing.video.Movie;
 
@@ -8,23 +9,24 @@ public class OpeningScreen implements Screen {
 
 	private Movie corp;
 	private FadeVideo background;
-	private PGif test;
+	private RippleCursor cursor;
 	
 	public OpeningScreen(PApplet window) {
 		
 		corp = new Movie(window, "res/titleScreen/CorpLogo.mp4");
 		background = new FadeVideo(window, "res/titleScreen/BackgroundMovie.mp4");
-		test = new PGif(100, 100, "res/test.gif");
+		cursor = new RippleCursor();
+		
+		corp.play();
+		background.setCoords(0, 0);
+		background.setDimensions(1280, 720);
 		
 	}
 	
 	@Override
 	public void setup() {
 		
-		corp.play();
-		background.setCoords(0, 0);
-		background.setDimensions(1280, 720);
-		test.stopLooping();
+
 		
 	}
 
@@ -38,7 +40,9 @@ public class OpeningScreen implements Screen {
 				background.loop();
 			background.draw(window);
 		}
-		test.draw(window);
+		
+		if (window.mousePressed)
+			cursor.draw(window);
 		
 	}
 	

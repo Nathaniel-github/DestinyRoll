@@ -33,6 +33,8 @@ public class PGif {
 	private float scale;
 	private boolean looping = true;
 	private boolean tempPlaying = false;
+	private double delay;
+	private boolean overrideDelay = false;
 	
 	public PGif(int x, int y, String pathName) {
 		
@@ -86,7 +88,7 @@ public class PGif {
 		if (!firstDraw) {
 			
 			int lastFrame = frameCount;
-			frameCount += (((System.nanoTime() - lastTimeStamp) / 10000000) / frameData[frameCount].getDelay());
+			frameCount += (((System.nanoTime() - lastTimeStamp) / 10000000) / (overrideDelay?delay:frameData[frameCount].getDelay()));
 			if (lastFrame != frameCount)
 				lastTimeStamp = System.nanoTime();
 			
@@ -117,6 +119,18 @@ public class PGif {
 		
 		x += xShift;
 		y += yShift;
+		
+	}
+	
+	public int getWidth() {
+		
+		return imageFrames[frameCount].width;
+		
+	}
+	
+	public int getHeight() {
+		
+		return imageFrames[frameCount].height;
 		
 	}
 	
@@ -172,6 +186,19 @@ public class PGif {
 	public void restart() {
 		
 		frameCount = 0;
+		
+	}
+	
+	public void overrideDelay(double delay) {
+		
+		overrideDelay = true;
+		this.delay = delay;
+		
+	}
+	
+	public void defaultDelay() {
+		
+		overrideDelay = false;
 		
 	}
 	
