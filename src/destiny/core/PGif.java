@@ -165,6 +165,7 @@ public class PGif {
 		restart();
 		
 		tempPlaying = true;
+		looping = false;
 		
 	}
 	
