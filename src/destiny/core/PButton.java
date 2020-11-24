@@ -8,48 +8,60 @@ public class PButton implements ClickEvent {
 	
 	private PShape collider;
 	private Runnable exec;
-	private boolean hasTexture;
+	private boolean visible;
 	private boolean listenOnClick;
 	private boolean isClicked = false;
 	
-	public PButton (PShape collider, Runnable code) {
+	public PButton (PShape collider) {
 		
 		this.collider = collider; 
-		this.exec = code;
+		this.exec = new Runnable() {
+			@Override
+			public void run() {}
+		};
 		
-		hasTexture = false;
+		visible = false;
 		listenOnClick = false;
 		
 	}
 	
-	public PButton (PShape collider, Runnable code, boolean onClick) {
+	public PButton (PShape collider, boolean onClick) {
 		
 		this.collider = collider; 
-		this.exec = code;
+		this.exec = new Runnable() {
+			@Override
+			public void run() {}
+		};
 		
-		hasTexture = false;
+		visible = false;
 		listenOnClick = onClick;
 		
 	}
 	
-	public PButton (PShape collider, Runnable code, PImage texture) {
+	public PButton (PShape collider, PImage texture) {
 		
 		this.collider = collider; 
-		this.exec = code;
+		this.exec = new Runnable() {
+			@Override
+			public void run() {}
+		};
 		
 		collider.setTexture(texture);
-		hasTexture = true;
+		visible = true;
 		listenOnClick = false;
 		
 	}
 	
-	public PButton (PShape collider, Runnable code, PImage texture, boolean onClick) {
+	public PButton (PShape collider, PImage texture, boolean onClick) {
 		
 		this.collider = collider; 
-		this.exec = code;
+		this.exec = new Runnable() {
+			@Override
+			public void run() {}
+		};
 		
 		collider.setTexture(texture);
-		hasTexture = true;
+		visible = true;
 		listenOnClick = onClick;
 		
 	}
@@ -62,7 +74,7 @@ public class PButton implements ClickEvent {
 			public void run() {}
 		};
 		
-		hasTexture = false;
+		visible = false;
 		listenOnClick = false;
 		
 	}
@@ -72,7 +84,7 @@ public class PButton implements ClickEvent {
 		
 		if (collider.contains(e.getMouseX(), e.getMouseY())) {
 			if (listenOnClick)
-				new Thread(exec).start();
+				exec.run();
 			isClicked = true;
 			return true;
 		}
@@ -85,7 +97,7 @@ public class PButton implements ClickEvent {
 		
 		if (collider.contains(e.getMouseX(), e.getMouseY())) {
 			if (!listenOnClick && isClicked)
-				new Thread(exec).start();
+				exec.run();
 			isClicked = false;
 			return true;
 		}
@@ -96,13 +108,14 @@ public class PButton implements ClickEvent {
 	
 	public void draw(PApplet window) {
 		
-		if (hasTexture)
+		if (visible)
 			window.shape(collider);
 		
 	}
 	
-	public void addListener() {
+	public void addListener(Runnable code) {
 		
+		this.exec = code;
 		EventHandler.addClickable(this);
 		
 	}
@@ -116,14 +129,20 @@ public class PButton implements ClickEvent {
 	public void setTexture(PImage texture) {
 		
 		collider.setTexture(texture);
-		hasTexture = true;
+		visible = true;
+		
+	}
+	
+	public void setVisibility(boolean visibility) {
+		
+		this.visible = visibility;
 		
 	}
 	
 	public void removeTexture() {
 		
 		collider.noTexture();
-		hasTexture = false;
+		visible = false;
 		
 	}
 	
