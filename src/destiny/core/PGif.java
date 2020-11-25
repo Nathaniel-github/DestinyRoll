@@ -30,7 +30,6 @@ public class PGif {
 	private int width;
 	private int height;
 	private boolean firstDraw = true;
-	private float scale;
 	private boolean looping = true;
 	private boolean tempPlaying = false;
 	private double delay;
@@ -59,24 +58,14 @@ public class PGif {
 		height = imageFrames[0].height;
 		
 		frameCount = 0;
-		scale = 1;
 		
 	}
 	
 	public void draw(PApplet window) {
 		
+		window.image(imageFrames[frameCount], (float)(x), (float)(y));
+		
 		advanceFrame();
-		
-		window.pushMatrix();
-
-		double midOfImageX = (x + imageFrames[frameCount].width/2.0);
-		double midOfImageY = (y + imageFrames[frameCount].width/2.0);
-		window.translate((float)(midOfImageX), (float)(midOfImageY));
-		
-		this.resize((int)(width * scale), (int)(height * scale));
-		window.image(imageFrames[frameCount], (float)(x - midOfImageX), (float)(y - midOfImageY));
-		
-		window.popMatrix();
 		
 	}
 	
@@ -105,6 +94,12 @@ public class PGif {
 			tempPlaying = false;
 			
 		}
+		
+	}
+	
+	public PImage getCurrentImage() {
+		
+		return imageFrames[frameCount];
 		
 	}
 	
@@ -155,7 +150,7 @@ public class PGif {
 	
 	public void setScale(float s) {
 		
-		scale = s;
+		this.resize((int)(width * s), (int)(height * s));
 		
 	}
 	

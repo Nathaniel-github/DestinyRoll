@@ -19,7 +19,7 @@ public class OpeningScreen implements Screen {
 		
 		corp.play();
 		background.setCoords(0, 0);
-		background.setDimensions(1280, 720);
+		background.resize(1280, 720);
 		
 	}
 	
