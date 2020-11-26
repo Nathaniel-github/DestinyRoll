@@ -8,8 +8,12 @@ abstract class Fader {
 	private float fadeSpeed;
 	
 	private boolean isFading = true;
+	private boolean white = false;
 	
 	public Fader(float startTint, float targetTint, float fadeSpeed) {
+		
+		if (fadeSpeed < 0)
+			throw new IllegalArgumentException("Fade speed must be greater than 0");
 		
 		tint = startTint;
 		this.targetTint = targetTint;
@@ -19,7 +23,10 @@ abstract class Fader {
 	
 	public void draw(PApplet window) {
 		
-		window.tint(tint);
+		if (!white)
+			window.tint(tint);
+		else
+			window.tint(255, (int)tint);
 		
 		tick();
 		
@@ -96,6 +103,12 @@ abstract class Fader {
 	public float getTint() {
 		
 		return tint;
+		
+	}
+	
+	public void fadeWhite(boolean fade) {
+		
+		white = fade;
 		
 	}
 	

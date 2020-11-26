@@ -28,6 +28,20 @@ public class FadeGif extends Fader {
 		
 	}
 	
+	public FadeGif(PGif gif) {
+		
+		super(0, 255, 0.2f);
+		myGif = gif.copy();
+		
+	}
+	
+	public FadeGif(PGif gif, float startTint, float targetTint, float fadeSpeed) {
+		
+		super(startTint, targetTint, fadeSpeed);
+		myGif = gif.copy();
+		
+	}
+	
 	@Override
 	public void draw(PApplet window) {
 		

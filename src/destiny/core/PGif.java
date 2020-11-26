@@ -22,6 +22,7 @@ import processing.core.PImage;
 public class PGif {
 	
 	private ImageFrame[] frameData;
+	private String pathName;
 	private PImage[] imageFrames;
 	private int frameCount;
 	private long lastTimeStamp;
@@ -36,6 +37,8 @@ public class PGif {
 	private boolean overrideDelay = false;
 	
 	public PGif(int x, int y, String pathName) {
+		
+		this.pathName = pathName;
 		
 		try {
 			frameData = readGIF(pathName);
@@ -58,6 +61,38 @@ public class PGif {
 		height = imageFrames[0].height;
 		
 		frameCount = 0;
+		
+	}
+	
+	private PGif(String pathName, int frameCount, long lastTimeStamp, int x, int y, int width, int height, boolean firstDraw, boolean looping, boolean tempPlaying, double delay, boolean overrideDelay) {
+		
+		try {
+			frameData = readGIF(pathName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		imageFrames = new PImage[frameData.length];
+		
+		for (int i = 0; i < frameData.length; i ++) {
+			
+			imageFrames[i] = new PImage(frameData[i].getImage());
+			
+		}
+		
+		this.resize(width, height);
+		
+		this.frameCount = frameCount;
+		this.lastTimeStamp = lastTimeStamp;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.firstDraw = firstDraw;
+		this.looping = looping;
+		this.tempPlaying = tempPlaying;
+		this.delay = delay;
+		this.overrideDelay = overrideDelay;
 		
 	}
 	
@@ -119,13 +154,13 @@ public class PGif {
 	
 	public int getWidth() {
 		
-		return imageFrames[frameCount].width;
+		return width;
 		
 	}
 	
 	public int getHeight() {
 		
-		return imageFrames[frameCount].height;
+		return height;
 		
 	}
 	
@@ -146,9 +181,12 @@ public class PGif {
 			
 		}
 		
+		width = imageFrames[0].width;
+		height = imageFrames[0].height;
+		
 	}
 	
-	public void setScale(float s) {
+	public void scale(float s) {
 		
 		this.resize((int)(width * s), (int)(height * s));
 		
@@ -194,6 +232,12 @@ public class PGif {
 	public void defaultDelay() {
 		
 		overrideDelay = false;
+		
+	}
+	
+	public PGif copy() {
+		
+		return new PGif(pathName, frameCount, lastTimeStamp, x, y, width, height, firstDraw, looping, tempPlaying, delay, overrideDelay);
 		
 	}
 	

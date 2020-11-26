@@ -10,7 +10,7 @@ public class FadeVideo extends Fader {
 	
 	public FadeVideo(PApplet window, String pathname) {
 		
-		super(0, 255, 0.2f);
+		super(0, 255, 0.5f);
 		video = new Movie(window, pathname);
 		
 	}
@@ -62,42 +62,6 @@ public class FadeVideo extends Fader {
 		
 	}
 	
-	public void loop() {
-		
-		video.loop();
-		
-	}
-	
-	public void play() {
-		
-		video.play();
-		
-	}
-	
-	public void pause() {
-		
-		video.pause();
-		
-	}
-	
-	public void resume() {
-		
-		video.play();
-		
-	}
-	
-	public void stop() {
-		
-		video.stop();
-		
-	}
-	
-	public void setVolume(float vol) {
-		
-		video.volume(vol);
-		
-	}
-	
 	public void scrollVolume(float scroll) {
 		
 		
@@ -109,12 +73,6 @@ public class FadeVideo extends Fader {
 	public void mute() {
 		
 		video.volume(0);
-		
-	}
-	
-	public boolean isPlaying() {
-		
-		return video.isPlaying();
 		
 	}
 	

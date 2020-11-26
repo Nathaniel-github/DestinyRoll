@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="lib/video.jar"/>
 	<classpathentry kind="lib" path="lib/processing_core.jar"/>
 	<classpathentry kind="lib" path="lib/kryonet-2.21-all.jar"/>
+	<classpathentry kind="lib" path="lib/kryo5-5.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -25,6 +25,7 @@ public class ScreenManager {
 	public static void drawCurrentScreen(PApplet window) {
 		
 		window.clear();
+		window.background(255, 255, 255);
 		if (currentScreen == null)
 			return;
 		allScreens.get(currentScreen).draw(window);;
