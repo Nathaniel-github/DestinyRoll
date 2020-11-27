@@ -17,7 +17,7 @@ public class EventHandler {
 		
 		if (clickables.contains(clicker))
 			return;
-		clickables.addFirst(clicker);	
+		clickables.addFirst(clicker);
 		
 	}
 	
