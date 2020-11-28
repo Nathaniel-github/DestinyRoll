@@ -1,9 +1,11 @@
 package destiny.panels;
 
 import destiny.core.*;
+
+import java.awt.Rectangle;
+
 import destiny.assets.*;
 import processing.core.PApplet;
-import processing.core.PShape;
 import processing.video.Movie;
 
 public class OpeningScreen implements Screen {
@@ -19,12 +21,17 @@ public class OpeningScreen implements Screen {
 		background = new FadeVideo(window, "res/titleScreen/BackgroundMovie.mp4");
 		cursor = RippleCursor.createHighPerformanceCursor();
 		cursor2 = RippleCursor.createLowPerformanceCursor();
-		button = new PButton(window.createShape(PApplet.RECT, 0, 0, 1280, 720));
+		button = new PButton(new Rectangle(0, 0, 1280, 720), false);
 		
 		corp.volume(0);
 		corp.play();
 		background.setCoords(0, 0);
 		background.resize(1280, 720);
+		
+	}
+	
+	@Override
+	public void setup() {
 		
 		button.addListener(new Runnable() {
 			@Override
@@ -32,11 +39,6 @@ public class OpeningScreen implements Screen {
 				System.out.println("It works?");
 			}
 		});
-		
-	}
-	
-	@Override
-	public void setup() {
 		
 	}
 

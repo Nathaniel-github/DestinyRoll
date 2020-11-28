@@ -1,81 +1,52 @@
 package destiny.core;
 
+import java.awt.Polygon;
+import java.awt.Shape;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PShape;
 
 public class PButton implements ClickEvent {
 	
-	private PShape collider;
+	private PShape shape;
+	private Shape collider;
 	private Runnable exec;
 	private boolean visible;
 	private boolean listenOnClick;
 	private boolean isClicked = false;
 	
-	public PButton (PShape collider) {
+	public PButton (Shape collider, boolean onClick) {
 		
-		this.collider = collider; 
-		this.exec = new Runnable() {
-			@Override
-			public void run() {}
-		};
-		
-		visible = false;
-		listenOnClick = false;
+		setupButton(new PShape(), collider, false, onClick);
 		
 	}
 	
-	public PButton (PShape collider, boolean onClick) {
+	public PButton (PShape shape, Shape collider, PImage texture, boolean onClick) {
 		
-		this.collider = collider; 
-		this.exec = new Runnable() {
-			@Override
-			public void run() {}
-		};
+		shape.setTexture(texture);
 		
-		visible = false;
-		listenOnClick = onClick;
-		
-	}
-	
-	public PButton (PShape collider, PImage texture) {
-		
-		this.collider = collider; 
-		this.exec = new Runnable() {
-			@Override
-			public void run() {}
-		};
-		
-		collider.setTexture(texture);
-		visible = true;
-		listenOnClick = false;
-		
-	}
-	
-	public PButton (PShape collider, PImage texture, boolean onClick) {
-		
-		this.collider = collider; 
-		this.exec = new Runnable() {
-			@Override
-			public void run() {}
-		};
-		
-		collider.setTexture(texture);
-		visible = true;
-		listenOnClick = onClick;
+		setupButton(shape, collider, true, onClick);
 		
 	}
 	
 	public PButton () {
 		
-		this.collider = new PShape();
+		setupButton(new PShape(), new Polygon(), false, false);
+		
+	}
+	
+	private void setupButton(PShape shape, Shape collider, boolean vis, boolean onClick) {
+		
+		this.shape = shape;
 		this.exec = new Runnable() {
 			@Override
 			public void run() {}
 		};
+		visible = vis;
+		listenOnClick = onClick;
 		
-		visible = false;
-		listenOnClick = false;
+		this.collider = collider;
 		
 	}
 
@@ -109,7 +80,7 @@ public class PButton implements ClickEvent {
 	public void draw(PApplet window) {
 		
 		if (visible)
-			window.shape(collider);
+			window.shape(shape);
 		
 	}
 	
@@ -128,7 +99,7 @@ public class PButton implements ClickEvent {
 	
 	public void setTexture(PImage texture) {
 		
-		collider.setTexture(texture);
+		shape.setTexture(texture);
 		visible = true;
 		
 	}
@@ -141,7 +112,7 @@ public class PButton implements ClickEvent {
 	
 	public void removeTexture() {
 		
-		collider.noTexture();
+		shape.noTexture();
 		visible = false;
 		
 	}
