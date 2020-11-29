@@ -37,8 +37,8 @@ public class ScreenManager {
 		if (!allScreens.containsKey(name))
 			throw new NullPointerException("That screen does not exist");
 		else {
-			currentScreen = name;
 			EventHandler.clearScreen();
+			currentScreen = name;
 			allScreens.get(currentScreen).setup();
 		}
 	}
