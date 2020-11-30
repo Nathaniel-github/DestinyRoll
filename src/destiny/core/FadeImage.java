@@ -1,4 +1,9 @@
 package destiny.core;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -7,29 +12,44 @@ public class FadeImage extends Fader {
 	public PImage myImage;
 	private int x, y;
 	
-	public FadeImage(PApplet window, String pathname) {
+	public FadeImage(String pathname) {
 		
 		super(0, 255, 0.2f);
-		myImage = window.loadImage(pathname);
+		try {
+			myImage = new PImage(ImageIO.read(new File(pathname)));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
-	public FadeImage(PApplet window, String pathname, float startTint, float targetTint, float fadeSpeed, int xCord, int yCord, int width, int height) {
+	public FadeImage(String pathname, float startTint, float targetTint, float fadeSpeed, int xCord, int yCord, int width, int height) {
 		
 		super(startTint, targetTint, fadeSpeed);
-		myImage = window.loadImage(pathname);
+		try {
+			myImage = new PImage(ImageIO.read(new File(pathname)));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		x = xCord;
 		y = yCord;
 		myImage.resize(width, height);
 		
 	}
 	
-	public FadeImage(PApplet window, String pathname, float startTint, float targetTint, float fadeSpeed, int xCord, int yCord) {
+	public FadeImage(String pathname, float startTint, float targetTint, float fadeSpeed, int xCord, int yCord) {
 		
 		super(startTint, targetTint, fadeSpeed);
 		x = xCord;
 		y = yCord;
-		myImage = window.loadImage(pathname);
+		try {
+			myImage = new PImage(ImageIO.read(new File(pathname)));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
