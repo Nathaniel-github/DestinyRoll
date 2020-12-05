@@ -2,6 +2,13 @@ package destiny.core;
 import processing.core.PApplet;
 import processing.video.Movie;
 
+/**
+ * 
+ * This class uses the Movie class from processing and adds fading capability to it
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ */
 public class FadeVideo extends Fader {
 	
 	public Movie video;

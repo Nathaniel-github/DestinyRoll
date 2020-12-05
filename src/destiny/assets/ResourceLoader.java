@@ -1,5 +1,12 @@
 package destiny.assets;
 
+/**
+ * 
+ * A class to load all resources statically and hold them until used
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ */
 import java.util.HashMap;
 
 import destiny.core.PGif;

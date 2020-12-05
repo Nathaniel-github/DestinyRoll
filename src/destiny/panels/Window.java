@@ -5,6 +5,14 @@ import destiny.core.*;
 import processing.core.PApplet;
 import processing.video.Movie;
 
+/**
+ * 
+ * This class represents the window that the game is displayed in. It extends from
+ * PApplet and forwards all necessary events to the EventHandler and ScreenManager
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ */
 public class Window extends PApplet {
 
 	public void setup() {

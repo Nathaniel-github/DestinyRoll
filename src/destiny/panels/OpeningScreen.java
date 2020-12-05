@@ -8,6 +8,13 @@ import destiny.assets.*;
 import processing.core.PApplet;
 import processing.video.Movie;
 
+/**
+ * 
+ * This class represents the opening/startup screen for the game
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ */
 public class OpeningScreen implements Screen {
 
 	private Movie corp;

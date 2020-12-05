@@ -7,6 +7,13 @@ import javax.imageio.ImageIO;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * 
+ * This class uses the PImage class from processing and adds fading capability to it
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ */
 public class FadeImage extends Fader {
 	
 	public PImage myImage;

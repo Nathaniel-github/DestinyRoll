@@ -4,6 +4,14 @@ import java.util.HashMap;
 
 import processing.core.PApplet;
 
+/**
+ * 
+ * This class manages all the screens in the game and decides which one should be 
+ * drawn and when
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ */
 public class ScreenManager {
 	
 	private static String currentScreen;

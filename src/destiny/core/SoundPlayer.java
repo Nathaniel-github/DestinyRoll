@@ -7,6 +7,14 @@ import java.io.*;
 import javax.sound.sampled.*;
 import javax.swing.Timer;
 
+/**
+ * 
+ * This class handles sound clips that need to be played during runtime. It can only
+ * handle .wav files because that is what the java libraries handle
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ */
 public class SoundPlayer {
 	
 	private AudioInputStream myobj;
@@ -108,15 +116,11 @@ public class SoundPlayer {
 	}
 	
 	public void restart() {
-		
 		restartSound.start();
-		
 	}
 	
 	public void forceRestart() {
-		
 		clip.setMicrosecondPosition(0);
-		
 	}
 	
 }

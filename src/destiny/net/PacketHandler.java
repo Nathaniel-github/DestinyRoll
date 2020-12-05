@@ -5,6 +5,13 @@ import java.io.IOException;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 
+/**
+ * 
+ * This class handles all incoming and outgoing packets between client and server
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ */
 public class PacketHandler {
 	
 	private static ServerPacket buffer;

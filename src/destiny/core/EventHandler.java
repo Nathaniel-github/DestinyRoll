@@ -1,5 +1,13 @@
 package destiny.core;
 
+/**
+ * 
+ * This class handles all events that are triggered in the PApplet and filters them
+ * to any listeners on those events
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ */
 import java.util.Deque;
 import java.util.LinkedList;
 

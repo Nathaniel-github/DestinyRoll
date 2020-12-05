@@ -7,6 +7,14 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PShape;
 
+/**
+ * 
+ * This class represents a button that can be added to a PApplet. It requires the 
+ * EventHandler in order for its events to be triggered
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ */
 public class PButton implements ClickEvent {
 	
 	private PShape shape;

@@ -2,6 +2,13 @@ package destiny.core;
 
 import processing.core.PApplet;
 
+/**
+ * 
+ * This class uses the existing PGif class and adds fading functionality to it
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ */
 public class FadeGif extends Fader {
 	
 	public PGif myGif;

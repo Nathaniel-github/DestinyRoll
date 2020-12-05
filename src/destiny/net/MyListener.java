@@ -3,7 +3,7 @@ package destiny.net;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
-public class MyListener extends Listener {
+class MyListener extends Listener {
 	
 	@Override
 	public void received (Connection connection, Object object) {

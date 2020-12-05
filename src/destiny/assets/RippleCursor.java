@@ -1,5 +1,13 @@
 package destiny.assets;
 
+/**
+ * 
+ * A class that handles all the functionality of a ripple that will follow the user's
+ * cursor around
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ */
 import java.util.ArrayList;
 import java.util.Iterator;
 
