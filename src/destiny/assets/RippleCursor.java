@@ -36,7 +36,7 @@ public class RippleCursor {
 	
 	public static RippleCursor createHighPerformanceCursor() {
 		
-		return new RippleCursor(20, 7);
+		return new RippleCursor(13, 7);
 		
 	}
 	

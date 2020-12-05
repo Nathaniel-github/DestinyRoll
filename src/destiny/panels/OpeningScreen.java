@@ -17,7 +17,7 @@ public class OpeningScreen implements Screen {
 	
 	public OpeningScreen(PApplet window) {
 		
-		corp = new Movie(window, "res/titleScreen/CorpLogo.mp4");
+		corp = new Movie(window, "res/titleScreen/CorpLogoTEMP.mp4");
 		background = new FadeVideo(window, "res/titleScreen/BackgroundMovie.mp4");
 		cursor = RippleCursor.createHighPerformanceCursor();
 		cursor2 = RippleCursor.createLowPerformanceCursor();
