@@ -22,8 +22,10 @@ public class OpeningScreen implements Screen {
 	private RippleCursor cursor, cursor2;
 	private PButton button;
 	
-	public OpeningScreen(PApplet window) {
-		
+	public OpeningScreen() {}
+	
+	@Override
+	public void setup(PApplet window) {
 		corp = new Movie(window, "res/titleScreen/CorpLogoTEMP.mp4");
 		background = new FadeVideo(window, "res/titleScreen/BackgroundMovie.mp4");
 		cursor = RippleCursor.createHighPerformanceCursor();
@@ -34,19 +36,6 @@ public class OpeningScreen implements Screen {
 		corp.play();
 		background.setCoords(0, 0);
 		background.resize(1280, 720);
-		
-	}
-	
-	@Override
-	public void setup() {
-		
-		button.addListener(new Runnable() {
-			@Override
-			public void run() {
-				System.out.println("It works?");
-			}
-		});
-		
 	}
 
 	@Override
@@ -64,6 +53,12 @@ public class OpeningScreen implements Screen {
 			if (!background.video.isPlaying()) {
 				background.video.loop();
 				corp.stop();
+				button.addListener(new Runnable() {
+					@Override
+					public void run() {
+						System.out.println("It works?");
+					}
+				});
 			}
 			background.draw(window);
 			
@@ -74,6 +69,16 @@ public class OpeningScreen implements Screen {
 			}
 		}
 		
+	}
+
+	@Override
+	public void dispose() {
+		corp = null;
+		background = null;
+		cursor = null;
+		cursor2 = null;
+		button.removeListener();
+		button = null;
 	}
 	
 }

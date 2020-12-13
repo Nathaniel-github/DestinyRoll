@@ -12,7 +12,8 @@ import processing.core.PApplet;
  */
 public interface Screen {
 
-	public void setup();
+	public void setup(PApplet window);
 	public void draw(PApplet window);
+	public void dispose();
 
 }

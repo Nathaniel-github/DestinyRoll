@@ -1,6 +1,5 @@
 package destiny.main;
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
 
 import destiny.panels.Window;

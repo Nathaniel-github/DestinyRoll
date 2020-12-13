@@ -23,10 +23,10 @@ public class ScreenManager {
 		
 	}
 	
-	public static void setScreen(String key, Screen s) {
+	public static void setScreen(String key, Screen s, PApplet window) {
 		
 		addScreen(key, s);
-		setCurrentScreenByName(key);
+		setCurrentScreenByName(key, window);
 		
 	}
 	
@@ -40,14 +40,16 @@ public class ScreenManager {
 		
 	}
 	
-	public static void setCurrentScreenByName(String name) {
+	public static void setCurrentScreenByName(String name, PApplet window) {
 		
 		if (!allScreens.containsKey(name))
 			throw new NullPointerException("That screen does not exist");
 		else {
 			EventHandler.clearScreen();
+			if (currentScreen != null)
+				allScreens.get(currentScreen).dispose();
 			currentScreen = name;
-			allScreens.get(currentScreen).setup();
+			allScreens.get(currentScreen).setup(window);
 		}
 	}
 	

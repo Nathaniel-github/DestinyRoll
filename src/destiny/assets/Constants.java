@@ -9,7 +9,7 @@ package destiny.assets;
  */
 public class Constants {
 	
-	public static final int NUM_OF_CHARACTERS = 10;
+	public static final int NUM_OF_CHARACTERS = 20;
 	
 	private Constants() {}
 
