@@ -185,7 +185,7 @@ public class PGif {
 		
 	}
 	
-	public void scale(float s) {
+	public void scale(double s) {
 		
 		this.resize((int)(width * s), (int)(height * s));
 		
@@ -225,6 +225,14 @@ public class PGif {
 		
 		overrideDelay = true;
 		this.delay = delay;
+		
+	}
+	
+	public void scaleByWidth(int width) {
+		
+		double scale = (double)width/this.width;
+		
+		this.scale(scale);
 		
 	}
 	

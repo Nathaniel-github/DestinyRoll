@@ -1,5 +1,7 @@
 package destiny.assets;
 
+import java.awt.Toolkit;
+
 /**
  * 
  * A class to hold some values that are constant throughout runtime
@@ -10,6 +12,9 @@ package destiny.assets;
 public class Constants {
 	
 	public static final int NUM_OF_CHARACTERS = 20;
+	public static final int SCREEN_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	public static final int SCREEN_HEIGHT = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 65;
+	
 	
 	private Constants() {}
 

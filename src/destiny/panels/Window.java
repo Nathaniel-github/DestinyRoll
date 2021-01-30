@@ -1,6 +1,5 @@
 package destiny.panels;
 
-import destiny.assets.ResourceLoader;
 import destiny.core.*;
 import processing.core.PApplet;
 import processing.video.Movie;
@@ -23,8 +22,6 @@ public class Window extends PApplet {
 		// You can switch to these screens on events that you want to monitor using -
 		// ScreenManager.setCurrentScreenByName(screenName);
 		ScreenManager.setScreen("opening", new OpeningScreen(), this);
-		
-		ResourceLoader.loadResources();
 		
 	}
 

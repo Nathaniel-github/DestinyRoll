@@ -1,6 +1,7 @@
 package destiny.core;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  * 
@@ -11,12 +12,34 @@ import processing.core.PApplet;
  */
 public class FadeGif extends Fader {
 	
-	public PGif myGif;
+	private PGif myGif;
 	
 	public FadeGif(String pathname) {
 		
 		super(0, 255, 0.2f);
 		myGif = new PGif(0, 0, pathname);
+		
+	}
+	
+	public FadeGif(String pathname, int x, int y) {
+		
+		super(0, 255, 0.2f);
+		myGif = new PGif(x, y, pathname);
+		
+	}
+	
+	public FadeGif(String pathname, float startTint, float targetTint, float fadeSpeed) {
+		
+		super(startTint, targetTint, fadeSpeed);
+		myGif = new PGif(0, 0, pathname);
+		
+	}
+	
+	public FadeGif(String pathname, int x, int y, int width, int height) {
+		
+		super(0, 255, 0.2f);
+		myGif = new PGif(x, y, pathname);
+		myGif.resize(width, height);
 		
 	}
 	
@@ -59,6 +82,102 @@ public class FadeGif extends Fader {
 		myGif.draw(window);
 		
 		window.popStyle();
+		
+	}
+	
+	public PImage getCurrentImage() {
+		
+		return myGif.getCurrentImage();
+		
+	}
+	
+	public void setCoordinates(int xCord, int yCord) {
+		
+		myGif.setCoordinates(xCord, yCord);
+		
+	}
+	
+	public void translate(int xShift, int yShift) {
+		
+		myGif.translate(xShift, yShift);
+		
+	}
+	
+	public int getWidth() {
+		
+		return myGif.getWidth();
+		
+	}
+	
+	public int getHeight() {
+		
+		return myGif.getHeight();
+		
+	}
+	
+	public boolean isFinished() {
+		
+		return  myGif.isFinished();
+		
+	}
+	
+	public void resize(int w, int h) {
+		
+		myGif.resize(w, h);
+		
+	}
+	
+	public void scaleByWidth(int width) {
+		
+		myGif.scaleByWidth(width);
+		
+	}
+	
+	public void scale(float s) {
+		
+		myGif.scale(s);
+		
+	}
+	
+	public void stopLooping() {
+		
+		myGif.stopLooping();
+		
+	}
+	
+	public void startLooping() {
+		
+		myGif.startLooping();
+		
+	}
+	
+	public void playOnce() {
+		
+		myGif.playOnce();
+		
+	}
+	
+	public void restart() {
+		
+		myGif.restart();
+		
+	}
+	
+	public void overrideDelay(double delay) {
+		
+		myGif.overrideDelay(delay);
+		
+	}
+	
+	public void defaultDelay() {
+		
+		myGif.defaultDelay();
+		
+	}
+	
+	public PGif copy() {
+		
+		return myGif.copy();
 		
 	}
 

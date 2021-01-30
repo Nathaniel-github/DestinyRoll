@@ -24,7 +24,7 @@ public class RippleCursor {
 	
 	private RippleCursor(int highPerfBarrier, int lowPerfBarrier) {
 		
-		ripple = new PGif(100, 100, "res/generalAssets/ripple.gif");
+		ripple = new PGif(0, 0, "res/generalAssets/ripple.gif");
 		
 		trail = new ArrayList<>();
 		ripple.scale(0.35f);

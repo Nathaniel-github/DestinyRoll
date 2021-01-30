@@ -11,7 +11,7 @@ import processing.video.Movie;
  */
 public class FadeVideo extends Fader {
 	
-	public Movie video;
+	private Movie video;
 	
 	private int x, y, w, h;
 	
@@ -74,6 +74,24 @@ public class FadeVideo extends Fader {
 		
 		float vol = (float)video.playbin.getVolume() + scroll;
 		video.volume(vol);
+		
+	}
+	
+	public float getSecondMark() {
+		
+		return video.time();
+		
+	}
+	
+	public boolean isPlaying() {
+		
+		return video.isPlaying();
+		
+	}
+	
+	public void loop() {
+		
+		video.loop();
 		
 	}
 	
