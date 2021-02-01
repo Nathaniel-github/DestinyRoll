@@ -22,6 +22,7 @@ public class OpeningScreen implements Screen {
 	private RippleCursor cursor, cursor2;
 	private PButton button;
 	private FadeGif touchScreen;
+	private boolean clicked = false;
 	
 	public OpeningScreen() {}
 	
@@ -60,13 +61,29 @@ public class OpeningScreen implements Screen {
 				button.addListener(new Runnable() {
 					@Override
 					public void run() {
-						System.out.println("It works?");
+						background.setFadeSpeed(40);
+						background.setTint(255);
+						background.setTargetTint(0);
+						background.fadeWhite(true);
+						clicked = true;
+						background.addListener(new Runnable() {
+
+							@Override
+							public void run() {
+								
+								System.out.println("Yes");
+								ScreenManager.setCurrentScreenByName("home", window);
+								
+							}
+							
+						});
+						button.removeListener();
 					}
 				});
 			}
 			background.draw(window);
 			
-			if (background.getSecondMark() > 5) {
+			if (background.getSecondMark() > 5 && !clicked) {
 				touchScreen.draw(window);
 			}
 			
@@ -82,6 +99,7 @@ public class OpeningScreen implements Screen {
 	@Override
 	public void dispose() {
 		corp = null;
+		background.stop();
 		background = null;
 		cursor = null;
 		cursor2 = null;

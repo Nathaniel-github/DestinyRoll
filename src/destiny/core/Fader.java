@@ -9,6 +9,7 @@ abstract class Fader {
 	
 	private boolean isFading = true;
 	private boolean white = false;
+	private Runnable listener = null;
 	
 	public Fader(float startTint, float targetTint, float fadeSpeed) {
 		
@@ -40,6 +41,7 @@ abstract class Fader {
 		if (tint == targetTint) {
 			
 			isFading = false;
+			this.reachedTint();
 			return;
 			
 		}
@@ -103,6 +105,25 @@ abstract class Fader {
 	public float getTint() {
 		
 		return tint;
+		
+	}
+	
+	public void addListener(Runnable listener) {
+		
+		this.listener = listener;
+		
+	}
+	
+	public void removeListener() {
+		
+		this.listener = null;
+		
+	}
+	
+	private void reachedTint() {
+		
+		if (listener != null)
+			listener.run();
 		
 	}
 	

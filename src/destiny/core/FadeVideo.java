@@ -101,4 +101,10 @@ public class FadeVideo extends Fader {
 		
 	}
 	
+	public void stop() {
+		
+		video.stop();
+		
+	}
+	
 }

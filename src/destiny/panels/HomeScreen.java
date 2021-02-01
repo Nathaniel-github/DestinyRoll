@@ -15,7 +15,9 @@ public class HomeScreen implements Screen {
 	@Override
 	public void draw(PApplet window) {
 		
-		
+		window.fill(0);
+		window.stroke(255);
+		window.rect(0, 0, 200, 200);
 
 	}
 

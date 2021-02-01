@@ -16,6 +16,10 @@ public class ScreenManager {
 	
 	private static String currentScreen;
 	private static HashMap<String, Screen> allScreens = new HashMap<>();
+	private static boolean disposeFlag = false;
+	private static String nextScreen;
+	
+	private ScreenManager() {}
 	
 	public static void addScreen(String key, Screen s) {
 		
@@ -26,7 +30,12 @@ public class ScreenManager {
 	public static void setScreen(String key, Screen s, PApplet window) {
 		
 		addScreen(key, s);
-		setCurrentScreenByName(key, window);
+		
+		EventHandler.clearScreen();
+		if (currentScreen != null)
+			allScreens.get(currentScreen).dispose();
+		currentScreen = key;
+		allScreens.get(currentScreen).setup(window);
 		
 	}
 	
@@ -36,7 +45,22 @@ public class ScreenManager {
 		window.background(255, 255, 255);
 		if (currentScreen == null)
 			return;
-		allScreens.get(currentScreen).draw(window);;
+		allScreens.get(currentScreen).draw(window);
+		
+		if (disposeFlag) {
+			disposeScreen(window);
+			disposeFlag = false;
+		}
+	}
+	
+	private static void disposeScreen(PApplet window) {
+		
+		EventHandler.clearScreen();
+		if (currentScreen != null)
+			allScreens.get(currentScreen).dispose();
+		currentScreen = nextScreen;
+		allScreens.get(currentScreen).setup(window);
+		nextScreen = null;
 		
 	}
 	
@@ -45,11 +69,10 @@ public class ScreenManager {
 		if (!allScreens.containsKey(name))
 			throw new NullPointerException("That screen does not exist");
 		else {
-			EventHandler.clearScreen();
-			if (currentScreen != null)
-				allScreens.get(currentScreen).dispose();
-			currentScreen = name;
-			allScreens.get(currentScreen).setup(window);
+
+			disposeFlag = true;
+			nextScreen = name;
+			
 		}
 	}
 	

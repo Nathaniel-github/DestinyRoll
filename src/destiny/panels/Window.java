@@ -22,6 +22,7 @@ public class Window extends PApplet {
 		// You can switch to these screens on events that you want to monitor using -
 		// ScreenManager.setCurrentScreenByName(screenName);
 		ScreenManager.setScreen("opening", new OpeningScreen(), this);
+		ScreenManager.addScreen("home", new HomeScreen());
 		
 	}
 
