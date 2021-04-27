@@ -99,18 +99,6 @@ By analyzing the changes in health, the game will proceed to despawn enemies or 
 
 
 
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image1.png "image_tooltip")
-
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image2.png "image_tooltip")
-
-
 Collection Screen:
 
 	The Collection page will just display an Array of revolutionaries. Each unlocked revolutionary will have a color profile, and locked revolutionaries will have a dark silhouette on the profile. Users can access the stats for unlocked characters by clicking on the revolutionary profile but not for locked characters. There will be a button to return to the home page.
