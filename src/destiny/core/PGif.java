@@ -12,8 +12,7 @@ import processing.core.PImage;
 
 /**
  * 
- * This class uses the OpenImaging GifDecoder to make a gif that is drawable to a
- * PApplet
+ * This class uses the OpenImaging GifDecoder to make a gif that is drawable to a PApplet
  * 
  * @author Nathaniel
  * @version 12/5/2020

@@ -13,7 +13,9 @@ public class FadeVideo extends Fader {
 	
 	private Movie video;
 	
-	private int x, y, w, h;
+	private int x, y, w, h, ticksToVol;
+	private float targetVol, volChange;
+	private boolean isChanging;
 	
 	public FadeVideo(PApplet window, String pathname) {
 		
@@ -51,6 +53,19 @@ public class FadeVideo extends Fader {
 		
 		window.image(video, x, y, w, h);
 		
+		if (isChanging) {
+			
+			this.scrollVolume(volChange);
+			
+			if (this.isFinished()) {
+				
+				isChanging = false;
+				this.video.volume(targetVol);
+				
+			}
+			
+		}
+		
 		window.popStyle();
 		
 	}
@@ -74,6 +89,20 @@ public class FadeVideo extends Fader {
 		
 		float vol = (float)video.playbin.getVolume() + scroll;
 		video.volume(vol);
+		
+	}
+	
+	public void setVolume(float vol) {
+		
+		video.volume(vol);
+		
+	}
+	
+	public void fadeVolumeTo(float vol) {
+		
+		isChanging = true;
+		volChange = (float)(vol-video.playbin.getVolume())/this.ticksTillTarget();
+		targetVol = vol;
 		
 	}
 	

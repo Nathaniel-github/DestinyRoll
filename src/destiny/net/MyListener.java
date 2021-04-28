@@ -9,7 +9,7 @@ class MyListener extends Listener {
 	public void received (Connection connection, Object object) {
 		
 		if (object instanceof ServerPacket) {
-			PacketHandler.addPacket((ServerPacket)object);
+			PacketHandler.deliverPacket((ServerPacket)object);
 		}
 		
 	}

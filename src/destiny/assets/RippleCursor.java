@@ -38,7 +38,7 @@ public class RippleCursor {
 	
 	public static RippleCursor createLowPerformanceCursor() {
 		
-		return new RippleCursor(5, 2);
+		return new RippleCursor(4, 2);
 		
 	}
 	

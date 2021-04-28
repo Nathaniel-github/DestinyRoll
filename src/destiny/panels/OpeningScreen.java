@@ -19,7 +19,7 @@ public class OpeningScreen implements Screen {
 
 	private Movie corp;
 	private FadeVideo background;
-	private RippleCursor cursor, cursor2;
+	private RippleCursor cursor;
 	private PButton button;
 	private FadeGif touchScreen;
 	private boolean clicked = false;
@@ -31,7 +31,6 @@ public class OpeningScreen implements Screen {
 		corp = new Movie(window, "res/titleScreen/CorpLogoTEMP.mp4");
 		background = new FadeVideo(window, "res/titleScreen/BackgroundMovie.mp4");
 		cursor = RippleCursor.createLowPerformanceCursor();
-		cursor2 = RippleCursor.createLowPerformanceCursor();
 		button = new PButton(new Rectangle(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), false);
 		touchScreen = new FadeGif("res/generalAssets/ClickToStart.gif", 0, 255, 0.01f);
 		
@@ -65,6 +64,7 @@ public class OpeningScreen implements Screen {
 						background.setTint(255);
 						background.setTargetTint(0);
 						background.fadeWhite(true);
+						background.fadeVolumeTo(0);
 						clicked = true;
 						background.addListener(new Runnable() {
 
@@ -77,7 +77,6 @@ public class OpeningScreen implements Screen {
 							}
 							
 						});
-						button.removeListener();
 					}
 				});
 			}
@@ -88,9 +87,9 @@ public class OpeningScreen implements Screen {
 			}
 			
 			if (window.mousePressed) {
-				cursor2.draw(window);
+				cursor.draw(window);
 			} else {
-				cursor2.clearTrail();
+				cursor.clearTrail();
 			}
 		}
 		
@@ -102,7 +101,6 @@ public class OpeningScreen implements Screen {
 		background.stop();
 		background = null;
 		cursor = null;
-		cursor2 = null;
 		button.removeListener();
 		button = null;
 		touchScreen = null;

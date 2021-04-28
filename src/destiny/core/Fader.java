@@ -1,6 +1,15 @@
 package destiny.core;
 import processing.core.PApplet;
 
+/**
+ * 
+ * This is the abstract class all faders extend from, it gives the backbone functionality of tinting 
+ * the window and ticking the fade along with other functionalities
+ * 
+ * @author Nathaniel
+ * @version 12/5/2020
+ *
+ */
 abstract class Fader {
 	
 	private float tint;
@@ -93,6 +102,12 @@ abstract class Fader {
 	public boolean isFinished() {
 		
 		return targetTint == tint;
+		
+	}
+	
+	public int ticksTillTarget() {
+		
+		return (int) (Math.abs(targetTint - tint)/fadeSpeed);
 		
 	}
 	
