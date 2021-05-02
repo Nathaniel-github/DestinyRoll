@@ -72,7 +72,7 @@ public class PButton implements ClickEvent {
 	}
 	
 	@Override
-	public boolean released(Event e) {
+	public boolean release(Event e) {
 		
 		if (collider.contains(e.getMouseX(), e.getMouseY())) {
 			if (!listenOnClick && isClicked)

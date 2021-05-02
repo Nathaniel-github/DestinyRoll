@@ -16,7 +16,7 @@ import processing.core.PImage;
  */
 public class FadeImage extends Fader {
 	
-	public PImage myImage;
+	private PImage myImage;
 	private int x, y;
 	
 	public FadeImage(String pathname) {

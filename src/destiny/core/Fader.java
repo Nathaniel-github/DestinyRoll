@@ -3,14 +3,14 @@ import processing.core.PApplet;
 
 /**
  * 
- * This is the abstract class all faders extend from, it gives the backbone functionality of tinting 
+ * This is the class all faders extend from, it gives the backbone functionality of tinting 
  * the window and ticking the fade along with other functionalities
  * 
  * @author Nathaniel
  * @version 12/5/2020
  *
  */
-abstract class Fader {
+class Fader {
 	
 	private float tint;
 	private float targetTint;

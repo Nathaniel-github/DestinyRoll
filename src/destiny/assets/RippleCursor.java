@@ -71,7 +71,7 @@ public class RippleCursor {
 	
 	public void clearTrail() {
 		
-		if (trail.size() > 0)
+		if (!trail.isEmpty())
 			trail.clear();
 		
 	}

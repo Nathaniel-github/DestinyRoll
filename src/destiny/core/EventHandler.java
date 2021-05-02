@@ -88,7 +88,7 @@ public class EventHandler {
 		
 		for (ClickEvent e : clickables) {
 			
-			e.released(pack);
+			e.release(pack);
 			
 		}
 		

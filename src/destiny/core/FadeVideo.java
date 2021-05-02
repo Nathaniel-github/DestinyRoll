@@ -13,7 +13,7 @@ public class FadeVideo extends Fader {
 	
 	private Movie video;
 	
-	private int x, y, w, h, ticksToVol;
+	private int x, y, w = -1, h = -1;
 	private float targetVol, volChange;
 	private boolean isChanging;
 	
@@ -51,7 +51,10 @@ public class FadeVideo extends Fader {
 		
 		super.draw(window);
 		
-		window.image(video, x, y, w, h);
+		if (w < 0)
+			window.image(video, x, y);
+		else
+			window.image(video, x, y, w, h);
 		
 		if (isChanging) {
 			
