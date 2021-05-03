@@ -21,7 +21,7 @@ public class FadeImage extends Fader {
 	
 	public FadeImage(String pathname) {
 		
-		super(0, 255, 0.2f);
+		super(0, 255, 0.9f);
 		try {
 			myImage = new PImage(ImageIO.read(new File(pathname)));
 		} catch (IOException e) {
@@ -78,6 +78,10 @@ public class FadeImage extends Fader {
 		this.x = x;
 		this.y = y;
 		
+	}
+	
+	public void resize(int width, int height) {
+		myImage.resize(width, height);
 	}
 
 }

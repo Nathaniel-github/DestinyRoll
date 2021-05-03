@@ -28,12 +28,11 @@ public class OpeningScreen implements Screen {
 	
 	@Override
 	public void setup(PApplet window) {
-		corp = new Movie(window, "res/titleScreen/CorpLogoTEMP.mp4");
+		corp = new Movie(window, "res/titleScreen/logo.mp4");
 		background = new FadeVideo(window, "res/titleScreen/BackgroundMovie.mp4");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		button = new PButton(new Rectangle(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT), false);
 		touchScreen = new FadeGif("res/generalAssets/ClickToStart.gif", 0, 255, 0.01f);
-		
 		touchScreen.scaleByWidth(500);
 		touchScreen.setCoordinates(Constants.SCREEN_WIDTH/2 - 250, Constants.SCREEN_HEIGHT - 100 - touchScreen.getHeight()/2);
 		corp.volume(0);
