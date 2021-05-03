@@ -4,13 +4,11 @@ import java.awt.Rectangle;
 
 import destiny.assets.Constants;
 import destiny.assets.RippleCursor;
-import destiny.core.FadeGif;
 import destiny.core.FadeImage;
 import destiny.core.PButton;
 import destiny.core.Screen;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
-import processing.video.Movie;
 
 public class HomeScreen implements Screen {
 
@@ -18,7 +16,6 @@ public class HomeScreen implements Screen {
 	private RippleCursor cursor;
 	private PButton button;
 	private FadeImage play;
-	private boolean clicked = false;
 	
 	public HomeScreen() {}
 	
@@ -31,7 +28,7 @@ public class HomeScreen implements Screen {
 		background.setCoords(0, 0);
 		play.resize(400, 200);
 		play.setCoords(Constants.SCREEN_WIDTH-500, 200);
-//		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
+		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 	}
 
 	@Override
@@ -55,7 +52,6 @@ public class HomeScreen implements Screen {
 					play.setTint(255);
 					play.setTargetTint(0);
 					play.fadeWhite(true);
-					clicked = true;
 					background.addListener(new Runnable() {
 
 						@Override
