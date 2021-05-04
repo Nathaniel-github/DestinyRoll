@@ -50,7 +50,7 @@ public class RippleCursor {
 	
 	public void draw(PApplet window) {
 		
-		ripple.setCoordinates(window.mouseX - ripple.getWidth() / 2, window.mouseY - ripple.getHeight() / 2);
+		ripple.setCoords(window.mouseX - ripple.getWidth() / 2, window.mouseY - ripple.getHeight() / 2);
 		
 		if (count % ((trail.size() > 9 || (Math.abs(window.pmouseX - window.mouseX) < 5 && Math.abs(window.pmouseY - window.mouseY) < 5) ) ? highPerformanceBarrier : lowPerformanceBarrier) == 0) {
 			FadeGif temp = new FadeGif(ripple, 255, 0, (int)(60/(highPerformanceBarrier)));

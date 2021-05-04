@@ -136,7 +136,7 @@ public class PGif {
 		
 	}
 	
-	public void setCoordinates(int xCord, int yCord) {
+	public void setCoords(int xCord, int yCord) {
 		
 		x = xCord;
 		y = yCord;

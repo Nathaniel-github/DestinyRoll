@@ -91,9 +91,9 @@ public class FadeGif extends Fader {
 		
 	}
 	
-	public void setCoordinates(int xCord, int yCord) {
+	public void setCoords(int xCord, int yCord) {
 		
-		myGif.setCoordinates(xCord, yCord);
+		myGif.setCoords(xCord, yCord);
 		
 	}
 	
