@@ -10,7 +10,7 @@ import destiny.core.Screen;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 
-public class MainScreen implements Screen {
+public class BattlePrepScreen implements Screen {
 	
 	private FadeImage background;
 	private RippleCursor cursor;
@@ -19,7 +19,7 @@ public class MainScreen implements Screen {
 	
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeImage("res/mainScreen/big.jpg");
+		background = new FadeImage("res/battlePrepScreen/nathaniel.PNG");
 		play = new FadeImage("res/generalAssets/play.png");
 		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
@@ -37,6 +37,7 @@ public class MainScreen implements Screen {
 		background.draw(window);
 		play.draw(window);
 		prev.draw(window);
+			
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {
@@ -57,7 +58,7 @@ public class MainScreen implements Screen {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("level", window);
+						ScreenManager.setCurrentScreenByName("main", window);
 					}
 					
 				});
@@ -82,7 +83,7 @@ public class MainScreen implements Screen {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("home", window);
+						ScreenManager.setCurrentScreenByName("level", window);
 					}
 					
 				});

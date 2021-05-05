@@ -10,7 +10,7 @@ import destiny.core.Screen;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 
-public class MainScreen implements Screen {
+public class LevelSelectScreen implements Screen {
 	
 	private FadeImage background;
 	private RippleCursor cursor;
@@ -19,7 +19,7 @@ public class MainScreen implements Screen {
 	
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeImage("res/mainScreen/big.jpg");
+		background = new FadeImage("res/levelSelectScreen/210322.jpg");
 		play = new FadeImage("res/generalAssets/play.png");
 		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
@@ -37,6 +37,7 @@ public class MainScreen implements Screen {
 		background.draw(window);
 		play.draw(window);
 		prev.draw(window);
+		
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {
@@ -53,11 +54,15 @@ public class MainScreen implements Screen {
 				play.setTint(255);
 				play.setTargetTint(0);
 				play.fadeWhite(true);
+				prev.setFadeSpeed(40);
+				prev.setTint(255);
+				prev.setTargetTint(0);
+				prev.fadeWhite(true);
 				background.addListener(new Runnable() {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("level", window);
+						ScreenManager.setCurrentScreenByName("prep", window);
 					}
 					
 				});
@@ -82,13 +87,13 @@ public class MainScreen implements Screen {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("home", window);
+						ScreenManager.setCurrentScreenByName("main", window);
 					}
 					
 				});
 			}
 		});
-}
+	}
 	
 
 @Override

@@ -10,33 +10,34 @@ import destiny.core.Screen;
 import destiny.core.ScreenManager;
 import processing.core.PApplet;
 
-public class MainScreen implements Screen {
+public class BattleScreen implements Screen {
 	
 	private FadeImage background;
 	private RippleCursor cursor;
 	private PButton button, back;
-	private FadeImage play, prev;
+	private FadeImage play, pause;
 	
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/mainScreen/big.jpg");
-		play = new FadeImage("res/generalAssets/play.png");
-		prev = new FadeImage("res/generalAssets/back.png");
+//		play = new FadeImage("res/generalAssets/play.png");
+		pause = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
-		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, 200, 400, 200), false);
+//		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, 200, 400, 200), false);
 		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT-200, 400, Constants.SCREEN_HEIGHT), false);
 		background.setCoords(0, 0);
-		play.resize(400, 200);
-		play.setCoords(Constants.SCREEN_WIDTH-500, 200);
-		prev.resize(400, 200);
-		prev.setCoords(0, Constants.SCREEN_HEIGHT-200);
+//		play.resize(400, 200);
+//		play.setCoords(Constants.SCREEN_WIDTH-500, 200);
+		pause.resize(400, 200);
+		pause.setCoords(0, Constants.SCREEN_HEIGHT-200);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 	}
 
 	public void draw(PApplet window) {
 		background.draw(window);
-		play.draw(window);
-		prev.draw(window);
+//		play.draw(window);
+		pause.draw(window);
+		
 		if (window.mousePressed) {
 			cursor.draw(window);
 		} else {
@@ -57,7 +58,7 @@ public class MainScreen implements Screen {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("level", window);
+						ScreenManager.setCurrentScreenByName("main", window);
 					}
 					
 				});
@@ -74,15 +75,15 @@ public class MainScreen implements Screen {
 				play.setTint(255);
 				play.setTargetTint(0);
 				play.fadeWhite(true);
-				prev.setFadeSpeed(40);
-				prev.setTint(255);
-				prev.setTargetTint(0);
-				prev.fadeWhite(true);
+				pause.setFadeSpeed(40);
+				pause.setTint(255);
+				pause.setTargetTint(0);
+				pause.fadeWhite(true);
 				background.addListener(new Runnable() {
 
 					@Override
 					public void run() {
-						ScreenManager.setCurrentScreenByName("home", window);
+						ScreenManager.setCurrentScreenByName("prep", window);
 					}
 					
 				});

@@ -22,7 +22,7 @@ public class HomeScreen implements Screen {
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/homeScreen/unknown.png");
-		play = new FadeImage("res/homeScreen/play.png");
+		play = new FadeImage("res/generalAssets/play.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
 		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, 200, 400, 200), false);		
 		background.setCoords(0, 0);
@@ -56,7 +56,7 @@ public class HomeScreen implements Screen {
 
 						@Override
 						public void run() {
-							ScreenManager.setCurrentScreenByName("home", window);
+							ScreenManager.setCurrentScreenByName("main", window);
 						}
 						
 					});
