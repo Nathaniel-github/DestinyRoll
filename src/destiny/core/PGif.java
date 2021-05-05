@@ -33,6 +33,8 @@ public class PGif {
 	private boolean tempPlaying = false;
 	private double delay;
 	private boolean overrideDelay = false;
+	private Runnable exec;
+	private boolean listenerFired = false;
 	
 	public PGif(int x, int y, String pathName) {
 		
@@ -104,8 +106,15 @@ public class PGif {
 	
 	private void advanceFrame() {
 		
-		if (isFinished())
+		if (isFinished()) {
+			if (exec != null && !listenerFired) {
+				listenerFired = true;
+				exec.run();
+			}
 			return;
+		} else if (listenerFired) {
+			listenerFired = false;
+		}
 		
 		if (!firstDraw) {
 			
@@ -141,6 +150,17 @@ public class PGif {
 		x = xCord;
 		y = yCord;
 		
+	}
+	
+	public void addListener(Runnable listener) {
+		
+		exec = listener;
+		listenerFired = false;
+		
+	}
+	
+	public void removeListener() {
+		exec = null;
 	}
 	
 	public void translate(int xShift, int yShift) {

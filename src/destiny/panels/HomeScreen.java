@@ -17,8 +17,6 @@ public class HomeScreen implements Screen {
 	private PButton button;
 	private FadeImage play;
 	
-	public HomeScreen() {}
-	
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/homeScreen/unknown.png");

@@ -24,8 +24,6 @@ public class OpeningScreen implements Screen {
 	private FadeGif touchScreen;
 	private boolean clicked = false;
 	
-	public OpeningScreen() {}
-	
 	@Override
 	public void setup(PApplet window) {
 		corp = new Movie(window, "res/titleScreen/logo.mp4");
