@@ -32,9 +32,6 @@ public class PacketHandler {
 			e.printStackTrace();
 		}
 		
-
-		
-		
 		client.addListener(new MyListener());
 
 	}

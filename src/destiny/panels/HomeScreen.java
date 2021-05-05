@@ -71,6 +71,7 @@ public class HomeScreen implements Screen {
 		cursor = null;
 		button.removeListener();
 		button = null;
+		play = null;
 	}
 
 }
