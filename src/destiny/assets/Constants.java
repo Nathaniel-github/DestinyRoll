@@ -14,6 +14,8 @@ public class Constants {
 	public static final int NUM_OF_CHARACTERS = 20;
 	public static final int SCREEN_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	public static final int SCREEN_HEIGHT = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight() - 65;
+	public static final int TOTAL_LEVELS = 20;
+	public static final int TOTAL_CHARACTERS = 20;
 	
 	
 	private Constants() {}

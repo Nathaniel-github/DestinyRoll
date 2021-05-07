@@ -1,11 +1,11 @@
 package destiny.core;
 
 import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.awt.Shape;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-import processing.core.PShape;
 
 /**
  * 
@@ -16,8 +16,8 @@ import processing.core.PShape;
  * @version 12/5/2020
  */
 public class PButton implements ClickEvent {
-	
-	private PShape shape;
+
+	private PImage texture;
 	private Shape collider;
 	private Runnable exec;
 	private boolean visible;
@@ -26,27 +26,26 @@ public class PButton implements ClickEvent {
 	
 	public PButton (Shape collider, boolean onClick) {
 		
-		setupButton(new PShape(), collider, false, onClick);
+		setupButton(collider, false, onClick);
 		
 	}
 	
-	public PButton (PShape shape, Shape collider, PImage texture, boolean onClick) {
+	public PButton (Shape collider, PImage texture, boolean onClick) {
 		
-		shape.setTexture(texture);
+		this.texture = texture;
 		
-		setupButton(shape, collider, true, onClick);
+		setupButton(collider, true, onClick);
 		
 	}
 	
 	public PButton () {
 		
-		setupButton(new PShape(), new Polygon(), false, false);
+		setupButton(new Polygon(), false, false);
 		
 	}
 	
-	private void setupButton(PShape shape, Shape collider, boolean vis, boolean onClick) {
+	private void setupButton(Shape collider, boolean vis, boolean onClick) {
 		
-		this.shape = shape;
 		this.exec = new Runnable() {
 			@Override
 			public void run() {}
@@ -87,8 +86,10 @@ public class PButton implements ClickEvent {
 	
 	public void draw(PApplet window) {
 		
-		if (visible)
-			window.shape(shape);
+		if (visible) {
+			Rectangle bounds= collider.getBounds();
+			window.image(texture, bounds.x, bounds.y, bounds.width, bounds.height);
+		}
 		
 	}
 	
@@ -107,7 +108,7 @@ public class PButton implements ClickEvent {
 	
 	public void setTexture(PImage texture) {
 		
-		shape.setTexture(texture);
+		this.texture = texture;
 		visible = true;
 		
 	}
@@ -120,7 +121,7 @@ public class PButton implements ClickEvent {
 	
 	public void removeTexture() {
 		
-		shape.noTexture();
+		texture = null;
 		visible = false;
 		
 	}
