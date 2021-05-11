@@ -24,12 +24,27 @@ public class PButton implements ClickEvent {
 	private boolean listenOnClick;
 	private boolean isClicked = false;
 	
+	/**
+	 * 
+	 * Creates a button with the specified area. Can also be set to trigger on click or on release
+	 * 
+	 * @param collider The bounding box that the button should be triggered on
+	 * @param onClick Whether or not the button should trigger on click or on release
+	 */
 	public PButton (Shape collider, boolean onClick) {
 		
 		setupButton(collider, false, onClick);
 		
 	}
 	
+	/**
+	 * 
+	 * Constructs a button with the specified area and image. Can also be set to trigger on click or on release
+	 * 
+	 * @param collider The bounding box that the button should be triggered on
+	 * @param texture The Image texture that should be drawn for the button
+	 * @param onClick Whether or not the button should trigger on click or on release
+	 */
 	public PButton (Shape collider, PImage texture, boolean onClick) {
 		
 		this.texture = texture;
@@ -38,6 +53,11 @@ public class PButton implements ClickEvent {
 		
 	}
 	
+	/**
+	 * 
+	 * Creates a button that can't be clicked on and is not visible
+	 * 
+	 */
 	public PButton () {
 		
 		setupButton(new Polygon(), false, false);
@@ -84,6 +104,13 @@ public class PButton implements ClickEvent {
 		
 	}
 	
+	/**
+	 * 
+	 * Draws the button to the window if it is visible (if it has an image)
+	 * 
+	 * @param window The PApplet the button should be drawn to
+	 * @post The PApplet will have the button drawn to it if the button is visible
+	 */
 	public void draw(PApplet window) {
 		
 		if (visible) {
@@ -93,6 +120,12 @@ public class PButton implements ClickEvent {
 		
 	}
 	
+	/**
+	 * 
+	 * Sets a block of code to be run on the event the button is clicked
+	 * 
+	 * @param code The code that should be run in the event the button is clicked
+	 */
 	public void addListener(Runnable code) {
 		
 		this.exec = code;
@@ -100,12 +133,24 @@ public class PButton implements ClickEvent {
 		
 	}
 	
+	/**
+	 * 
+	 * Sets the button to either listen on click or on release
+	 * 
+	 * @param onClick If true the button will be triggered on click, if false it will be triggered on release
+	 */
 	public void listenOnClick(boolean onClick) {
 		
 		listenOnClick = onClick;
 		
 	}
 	
+	/**
+	 * 
+	 * Sets the image for the button
+	 * 
+	 * @param texture The Image that the button should be drawn with
+	 */
 	public void setTexture(PImage texture) {
 		
 		this.texture = texture;
@@ -113,12 +158,11 @@ public class PButton implements ClickEvent {
 		
 	}
 	
-	public void setVisibility(boolean visibility) {
-		
-		this.visible = visibility;
-		
-	}
-	
+	/**
+	 * 
+	 * Removes the image texture from the button
+	 * 
+	 */
 	public void removeTexture() {
 		
 		texture = null;
@@ -126,8 +170,14 @@ public class PButton implements ClickEvent {
 		
 	}
 	
+	/**
+	 * 
+	 * Removes the runnable code from the button and doesn't allow the button to be triggered
+	 * 
+	 */
 	public void removeListener() {
 		
+		exec = null;
 		EventHandler.removeClickable(this);
 		
 	}

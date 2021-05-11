@@ -1,18 +1,17 @@
 package destiny.core;
 
+
+import java.util.Deque;
+import java.util.LinkedList;
+
+import processing.core.PApplet;
 /**
- * 
  * This class handles all events that are triggered in the PApplet and filters them
  * to any listeners on those events
  * 
  * @author Nathaniel
  * @version 12/5/2020
  */
-import java.util.Deque;
-import java.util.LinkedList;
-
-import processing.core.PApplet;
-
 public class EventHandler {
 	
 	private static Deque<ClickEvent> clickables = new LinkedList<ClickEvent>();
@@ -49,6 +48,13 @@ public class EventHandler {
 		
 	}
 	
+	/**
+	 *
+	 * This call should be made whenever there is a click that has occurred on the screen
+	 * 
+	 * @pre The PApplet must have been clicked
+	 * @param window The screen that was clicked on
+	 */
 	public static void notifyClickables(PApplet window) {
 		
 		if (!window.mousePressed)
@@ -65,6 +71,13 @@ public class EventHandler {
 		
 	}
 	
+	/**
+	 * 
+	 * This call should be made whenever the mouse has been dragged on the screen
+	 * 
+	 * @pre The PApplet must have had the mouse dragged on it
+	 * @param window The screen that was dragged across
+	 */
 	public static void notifyDraggables(PApplet window) {
 		
 		Event pack = makeEvent(window);
@@ -78,6 +91,12 @@ public class EventHandler {
 		
 	}
 	
+	/**
+	 * 
+	 * This call should be made whenever the mouse has been released
+	 * 
+	 * @param window The screen that had the mouse released
+	 */
 	public static void notifyRelease(PApplet window) {
 		
 		if (window.mousePressed)

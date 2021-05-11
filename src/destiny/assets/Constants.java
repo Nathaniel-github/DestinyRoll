@@ -20,6 +20,13 @@ public class Constants {
 	
 	private Constants() {}
 
+	/**
+	 * 
+	 * Gives the string corresponding to the integer action
+	 * 
+	 * @param act The integer form of the action you are looking for
+	 * @return The string form of the action for the integer given. Will return null if not an actual integer action
+	 */
 	public static String getActionForInt(int act) {
 		
 		switch(act) {

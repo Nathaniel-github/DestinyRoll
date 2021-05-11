@@ -21,12 +21,26 @@ public class ScreenManager {
 	
 	private ScreenManager() {}
 	
+	/**
+	 * 
+	 * Add a Screen to the ScreenManager
+	 * 
+	 * @param key The key that the screen should be stored with
+	 * @param s The screen that should be placed with that key
+	 */
 	public static void addScreen(String key, Screen s) {
 		
 		allScreens.put(key, s);
 		
 	}
-	
+	/**
+	 * 
+	 * Set the screen to the given screen given a screen object and key
+	 * 
+	 * @param key The desired screen's name
+	 * @param s The Screen object
+	 * @param window The window that the screen should be drawn on
+	 */
 	public static void setScreen(String key, Screen s, PApplet window) {
 		
 		addScreen(key, s);
@@ -39,6 +53,13 @@ public class ScreenManager {
 		
 	}
 	
+	/**
+	 * 
+	 * Draws the screen that is selected
+	 * 
+	 * @post Has the screen drawn to the PApplet
+	 * @param window The PApplet that the screen should be drawn to
+	 */
 	public static void drawCurrentScreen(PApplet window) {
 		
 		window.clear();
@@ -52,7 +73,7 @@ public class ScreenManager {
 			disposeFlag = false;
 		}
 	}
-	
+
 	private static void disposeScreen(PApplet window) {
 		
 		EventHandler.clearScreen();
@@ -64,6 +85,13 @@ public class ScreenManager {
 		
 	}
 	
+	/**
+	 * 
+	 * Set the screen with the given screen name
+	 * 
+	 * @param name The name of the screen
+	 * @param window The window that the screen should be drawn to
+	 */
 	public static void setCurrentScreenByName(String name, PApplet window) {
 		
 		if (!allScreens.containsKey(name))

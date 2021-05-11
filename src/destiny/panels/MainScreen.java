@@ -16,30 +16,34 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 /**
- * MainScreen is the screen where the user can select which game modes to play or determine which aspect of the game they want to explore
+ * MainScreen is the screen where the user can select which game modes to play
+ * or determine which aspect of the game they want to explore
+ * 
  * @author Jay Paek
  * @version 5/7/2021
  *
  */
 public class MainScreen implements Screen {
-	
+
 	private FadeImage background;
 	private RippleCursor cursor;
 	private PButton button, back;
-	
+
 	@Override
 	public void setup(PApplet window) {
 		background = new FadeImage("res/mainScreen/big.jpg");
 		cursor = RippleCursor.createLowPerformanceCursor();
-		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, 200, 400, 200), false);
-		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT-200, 200, Constants.SCREEN_HEIGHT), false);
+		button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - 500, 200, 400, 200), false);
+		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT - 200, 200, Constants.SCREEN_HEIGHT), false);
 		try {
-			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH-500, 200, 400, 200), new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
-			back = new PButton(new Rectangle(50, Constants.SCREEN_HEIGHT-250, 200, 200), new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
+			button = new PButton(new Rectangle(Constants.SCREEN_WIDTH - 500, 200, 400, 200),
+					new PImage(ImageIO.read(new File("res/generalAssets/play.png"))), false);
+			back = new PButton(new Rectangle(50, Constants.SCREEN_HEIGHT - 250, 200, 200),
+					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 		background.setCoords(0, 0);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 	}
@@ -66,7 +70,7 @@ public class MainScreen implements Screen {
 					public void run() {
 						ScreenManager.setCurrentScreenByName("level", window);
 					}
-					
+
 				});
 			}
 		});
@@ -83,20 +87,19 @@ public class MainScreen implements Screen {
 					public void run() {
 						ScreenManager.setCurrentScreenByName("home", window);
 					}
-					
+
 				});
 			}
 		});
-}
-	
+	}
 
-@Override
-public void dispose() {
-	background = null;
-	cursor = null;
-	button.removeListener();
-	button = null;
+	@Override
+	public void dispose() {
+		background = null;
+		cursor = null;
+		button.removeListener();
+		button = null;
 
-}
+	}
 
 }

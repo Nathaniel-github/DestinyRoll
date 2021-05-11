@@ -36,18 +36,37 @@ public class RippleCursor {
 		
 	}
 	
+	/**
+	 * 
+	 * Creates a RippleCursor object with a smaller amount of time between ripples
+	 * 
+	 * @return The RippleCursor object. It will have much more ripples than a high performance cursor
+	 */
 	public static RippleCursor createLowPerformanceCursor() {
 		
 		return new RippleCursor(4, 2);
 		
 	}
 	
+	/**
+	 * 
+	 * Creates a RippleCursor object with a larger amount of time between ripples
+	 * 
+	 * @return The RippleCursor object. It will have much less ripples than a low performance cursor
+	 */
 	public static RippleCursor createHighPerformanceCursor() {
 		
 		return new RippleCursor(13, 7);
 		
 	}
 	
+	/**
+	 * 
+	 * Draws the ripple cursor and its trail to the screen
+	 * 
+	 * @param window The PApplet that should have the cursor drawn to it
+	 * @post The given PApplet will have the cursor drawn to it
+	 */
 	public void draw(PApplet window) {
 		
 		ripple.setCoords(window.mouseX - ripple.getWidth() / 2, window.mouseY - ripple.getHeight() / 2);
@@ -69,6 +88,11 @@ public class RippleCursor {
 		
 	}
 	
+	/**
+	 * 
+	 * Clears the trail following the ripple cursor
+	 * 
+	 */
 	public void clearTrail() {
 		
 		if (!trail.isEmpty())

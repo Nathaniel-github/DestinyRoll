@@ -19,6 +19,12 @@ public class FadeImage extends Fader {
 	private PImage myImage;
 	private int x, y;
 	
+	/**
+	 * 
+	 * Creates a fade image with the given image
+	 * 
+	 * @param pathname The image that should be used
+	 */
 	public FadeImage(String pathname) {
 		
 		super(0, 255, 0.9f);
@@ -31,6 +37,19 @@ public class FadeImage extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Creates a fading image with the specified parameters
+	 * 
+	 * @param pathname The image path
+	 * @param startTint The starting tint of the fade
+	 * @param targetTint The target tint of the fade
+	 * @param fadeSpeed The speed that the image should fade at
+	 * @param xCord The x coordinate of the top left of the image
+	 * @param yCord The y coordinate of the top left of the image
+	 * @param width The width that the image should be drawn with
+	 * @param height The height that the image should be drawn with
+	 */
 	public FadeImage(String pathname, float startTint, float targetTint, float fadeSpeed, int xCord, int yCord, int width, int height) {
 		
 		super(startTint, targetTint, fadeSpeed);
@@ -46,6 +65,17 @@ public class FadeImage extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Creates a fading image with the specified parameters
+	 * 
+	 * @param pathname The image path
+	 * @param startTint The starting tint of the fade
+	 * @param targetTint The target tint of the fade
+	 * @param fadeSpeed The speed that the image should fade at
+	 * @param xCord The x coordinate of the top left of the image
+	 * @param yCord The y coordinate of the top left of the image
+	 */
 	public FadeImage(String pathname, float startTint, float targetTint, float fadeSpeed, int xCord, int yCord) {
 		
 		super(startTint, targetTint, fadeSpeed);
@@ -60,6 +90,13 @@ public class FadeImage extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Draws the fading image to the given PApplet
+	 * 
+	 * @post The PApplet will have a fading image drawn to it
+	 * 
+	 */
 	@Override
 	public void draw(PApplet window) {
 		
@@ -73,6 +110,13 @@ public class FadeImage extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Sets the coordinates of the fading image
+	 * 
+	 * @param x The x coordinate of the top left of the image
+	 * @param y The y coordinate of the top left of the image
+	 */
 	public void setCoords(int x, int y) {
 		
 		this.x = x;
@@ -80,6 +124,13 @@ public class FadeImage extends Fader {
 		
 	}
 	
+	/**
+	 * 
+	 * Resizes the fading image
+	 * 
+	 * @param width The width the image should be drawn with
+	 * @param height The height the image should be drawn with
+	 */
 	public void resize(int width, int height) {
 		myImage.resize(width, height);
 	}

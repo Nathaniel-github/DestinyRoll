@@ -13,20 +13,26 @@ import processing.core.PApplet;
 public interface Screen {
 
 	/**
-	 * initialize all objects and variables that would be used in the Screen
-	 * @param window
+	 * 
+	 * Initializes all objects and variables that would be used in the Screen
+	 * 
+	 * @param window The PApplet that represents the window the Screen should be on
 	 */
 	public void setup(PApplet window);
 	
 	/**
-	 * draw the Screen
-	 * @param window
+	 * 
+	 * Draws the Screen to the given window
+	 * 
+	 * @param window The PApplet that the Screen is drawn to
+	 * @post The PApplet will have the Screen drawn to it
 	 */
 	public void draw(PApplet window);
 	
 	/**
-	 * set all objects to null to conserve RAM
-	 * @param window
+	 * 
+	 * Set all objects to null to conserve RAM
+	 * 
 	 */
 	public void dispose();
 
