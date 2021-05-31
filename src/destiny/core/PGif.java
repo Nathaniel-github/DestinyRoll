@@ -35,6 +35,7 @@ public class PGif {
 	private boolean overrideDelay = false;
 	private Runnable exec;
 	private boolean listenerFired = false;
+	private boolean horizontalFlip = false;
 	
 	/**
 	 * 
@@ -113,7 +114,14 @@ public class PGif {
 	 */
 	public void draw(PApplet window) {
 		
-		window.image(imageFrames[frameCount], (float)(x), (float)(y));
+		window.pushMatrix();
+		
+		window.translate(x + width/2, y + height/2);
+		if (horizontalFlip)
+			window.scale(-1, 1);
+		window.image(imageFrames[frameCount], -width/2, -height/2);
+		
+		window.popMatrix();
 		
 		advanceFrame();
 		
@@ -170,13 +178,13 @@ public class PGif {
 	 * 
 	 * Sets the coordinates of the gif
 	 * 
-	 * @param xCord The x coordinate of the top left of the gif
-	 * @param yCord The y coordinate of the top left of the gif
+	 * @param x The x coordinate of the top left of the gif
+	 * @param y The y coordinate of the top left of the gif
 	 */
-	public void setCoords(int xCord, int yCord) {
+	public void setCoords(int x, int y) {
 		
-		x = xCord;
-		y = yCord;
+		this.x = x;
+		this.y = y;
 		
 	}
 	
@@ -206,13 +214,24 @@ public class PGif {
 	 * 
 	 * Shifts the top left corner of the gif by the specified amount
 	 * 
-	 * @param xShift
-	 * @param yShift
+	 * @param xShift The amount you want to shift along the x axis. Positive is to the right
+	 * @param yShift The amount you want to shift along the y axis. Positive is down
 	 */
 	public void translate(int xShift, int yShift) {
 		
 		x += xShift;
 		y += yShift;
+		
+	}
+	
+	/**
+	 * 
+	 * Flips the gif along the horizontal
+	 * 
+	 */
+	public void flipHorizontal() {
+		
+		horizontalFlip = !horizontalFlip;
 		
 	}
 	
@@ -239,7 +258,28 @@ public class PGif {
 		return height;
 		
 	}
-	
+	/**
+	 * 
+	 * Gets the x coordinate of the gif 
+	 * 
+	 * @return The x coordinate of the gif
+	 */
+	public int getX() {
+		
+		return x;
+		
+	}
+	/**
+	 * 
+	 * Gets the y coordinate of the gif 
+	 * 
+	 * @return The y coordinate of the gif
+	 */
+	public int getY() {
+		
+		return y;
+		
+	}
 	/**
 	 * 
 	 * Calculates whether or not the gif is done playing
@@ -334,6 +374,7 @@ public class PGif {
 	public void restart() {
 		
 		frameCount = 0;
+		lastTimeStamp = System.nanoTime();
 		
 	}
 	
@@ -359,6 +400,20 @@ public class PGif {
 	public void scaleByWidth(int width) {
 		
 		double scale = (double)width/this.width;
+		
+		this.scale(scale);
+		
+	}
+	
+	/**
+	 * 
+	 * Scales the gif perfectly given a new desired height
+	 * 
+	 * @param height Desired new height
+	 */
+	public void scaleByHeight(int height) {
+		
+		double scale = (double)height/this.height;
 		
 		this.scale(scale);
 		

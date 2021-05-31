@@ -1,5 +1,14 @@
 package destiny.assets;
 
+
+import java.util.ArrayList;
+
+import java.util.Iterator;
+
+import destiny.core.FadeGif;
+import destiny.core.PGif;
+import processing.core.PApplet;
+
 /**
  * 
  * A class that handles all the functionality of a ripple that will follow the user's
@@ -8,13 +17,6 @@ package destiny.assets;
  * @author Nathaniel
  * @version 12/5/2020
  */
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import destiny.core.FadeGif;
-import destiny.core.PGif;
-import processing.core.PApplet;
-
 public class RippleCursor {
 	
 	private PGif ripple;

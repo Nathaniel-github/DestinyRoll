@@ -18,11 +18,18 @@ import processing.core.PImage;
 public class PButton implements ClickEvent {
 
 	private PImage texture;
+	private PGif gifTexture;
 	private Shape collider;
 	private Runnable exec;
+	private Runnable holdExec, holdReleaseExec;
+	private int heldTimer = 120;
 	private boolean visible;
 	private boolean listenOnClick;
+	private boolean isGif;
 	private boolean isClicked = false;
+	private boolean highlight = false;
+	private boolean isListening = true;
+	private boolean isHeld = false;
 	
 	/**
 	 * 
@@ -80,6 +87,9 @@ public class PButton implements ClickEvent {
 	@Override
 	public boolean click(Event e) {
 		
+		if (!isListening)
+			return false;
+		
 		if (collider.contains(e.getMouseX(), e.getMouseY())) {
 			if (listenOnClick)
 				exec.run();
@@ -93,9 +103,16 @@ public class PButton implements ClickEvent {
 	@Override
 	public boolean release(Event e) {
 		
+		if (!isListening)
+			return false;
+		
 		if (collider.contains(e.getMouseX(), e.getMouseY())) {
-			if (!listenOnClick && isClicked)
+			if (!listenOnClick && isClicked && !isHeld)
 				exec.run();
+			else if (isHeld) {
+				isHeld = false;
+				holdReleaseExec.run();
+			}
 			isClicked = false;
 			return true;
 		}
@@ -113,11 +130,41 @@ public class PButton implements ClickEvent {
 	 */
 	public void draw(PApplet window) {
 		
-		if (visible) {
-			Rectangle bounds= collider.getBounds();
-			window.image(texture, bounds.x, bounds.y, bounds.width, bounds.height);
+		if (isClicked && !listenOnClick && holdExec != null) {
+			
+			heldTimer--;
+			
 		}
 		
+		if (heldTimer <= 0) {
+			
+			heldTimer = 120;
+			isClicked = false;
+			isHeld = true;
+			if (holdExec != null)
+				holdExec.run();
+			
+		}
+		
+		if (visible) {
+			if (!isGif) {
+				Rectangle bounds= collider.getBounds();
+				window.image(texture, bounds.x, bounds.y, bounds.width, bounds.height);
+			} else {
+				gifTexture.draw(window);
+			}
+			if(highlight) {
+				window.pushStyle();
+				window.stroke(0);
+				window.strokeWeight(5f);
+				Rectangle bounds= collider.getBounds();
+				window.line(bounds.x, bounds.y, bounds.x + bounds.width, bounds.y);
+				window.line(bounds.x, bounds.y, bounds.x, bounds.y + bounds.height);
+				window.line(bounds.x + bounds.width, bounds.y, bounds.x + bounds.width, bounds.y + bounds.height);
+				window.line(bounds.x + bounds.width, bounds.y + bounds.height, bounds.x, bounds.y + bounds.height);
+				window.popStyle();
+			}
+		}
 	}
 	
 	/**
@@ -155,6 +202,36 @@ public class PButton implements ClickEvent {
 		
 		this.texture = texture;
 		visible = true;
+		isGif = false;
+		
+	}
+	
+	/**
+	 * 
+	 * Sets the texture of the button to a gif
+	 * 
+	 * @param texture The gif that should be the button's texture
+	 */
+	public void setGifTexture(PGif texture) {
+		
+		gifTexture = texture;
+		visible = true;
+		Rectangle bounds= collider.getBounds();
+		texture.setCoords(bounds.x, bounds.y);
+		texture.resize(bounds.width, bounds.height);
+		isGif = true;
+		
+	}
+	
+	/**
+	 * 
+	 * Sets the highlight/border around the button
+	 * 
+	 * @param highlight Whether or not the highlight should be on
+	 */
+	public void setHightlight(boolean highlight) {
+		
+		this.highlight = highlight;
 		
 	}
 	
@@ -167,6 +244,8 @@ public class PButton implements ClickEvent {
 		
 		texture = null;
 		visible = false;
+		gifTexture = null;
+		isGif = false;
 		
 	}
 	
@@ -182,4 +261,104 @@ public class PButton implements ClickEvent {
 		
 	}
 
+	/**
+	 * 
+	 * Toggles the highlight to the opposite of what it currently is
+	 * 
+	 */
+	public void toggleHighlight() {
+		highlight = !highlight;
+	}
+	
+	/**
+	 * 
+	 * Returns whether or not the button is highlighted
+	 * 
+	 * @return Whether or not the button is highlighted
+	 */
+	public boolean isHighlighted() {
+		return highlight;
+	}
+	
+	/**
+	 * 
+	 * Disables the button from listening
+	 * 
+	 */
+	public void disableListener() {
+		isListening = false;
+	}
+	
+	/**
+	 * 
+	 * Re-enables the button to perform its action on click
+	 * 
+	 */
+	public void enableListener() {
+		isListening = true;
+	}
+	
+	/**
+	 * 
+	 * Adds a listener to run on the button being held
+	 * 
+	 * @param code The code to run on being held
+	 */
+	public void addHoldListener(Runnable code) {
+		
+		holdExec = code;
+		EventHandler.addClickable(this);
+		
+	}
+	
+	/**
+	 * 
+	 * Adds a listener to run on the button hold being released
+	 * 
+	 * @param code The code that should be run whenever the button is held
+	 */
+	public void addHoldReleaseListener(Runnable code) {
+		
+		holdReleaseExec = code;
+		EventHandler.addClickable(this);
+		
+	}
+	
+	/**
+	 * 
+	 * Removes the on hold listener
+	 * 
+	 */
+	public void removeHoldListener() {
+		
+		holdExec = null;
+		EventHandler.removeClickable(this);
+		
+	}
+	
+	/**
+	 * 
+	 * Removes the on hold release listener
+	 * 
+	 */
+	public void removeHoldReleaseListener() {
+		
+		holdReleaseExec = null;
+		EventHandler.removeClickable(this);
+		
+	}
+	
+	/**
+	 * 
+	 * Removes both the on hold and on hold release listeners
+	 * 
+	 */
+	public void removeHoldListeners() {
+		
+		holdExec = null;
+		holdReleaseExec = null;
+		EventHandler.removeClickable(this);
+		
+	}
+	
 }

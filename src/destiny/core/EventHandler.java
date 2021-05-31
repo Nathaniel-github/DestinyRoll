@@ -30,6 +30,8 @@ public class EventHandler {
 	
 	static void removeClickable(ClickEvent clicker) {
 		
+		if (!clickables.contains(clicker))
+			return;
 		clickables.remove(clicker);
 		
 	}

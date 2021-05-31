@@ -1,14 +1,18 @@
-package destiny.panels;
+ package destiny.panels;
 
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 import destiny.assets.Constants;
 import destiny.assets.RippleCursor;
+import destiny.assets.Player;
+import destiny.core.FadeGif;
 import destiny.core.FadeImage;
+import destiny.core.FadeVideo;
 import destiny.core.PButton;
 import destiny.core.Screen;
 import destiny.core.ScreenManager;
@@ -23,49 +27,58 @@ import processing.core.PImage;
  */
 public class LevelSelectScreen implements Screen {
 	
-	private FadeImage background;
+	private FadeVideo background;
 	private RippleCursor cursor;
 	private PButton  back;
 	private FadeImage prev;
 	private PButton[] levelButtons;
-	private int page;
+
 	
 	@Override
 	public void setup(PApplet window) {
-		background = new FadeImage("res/levelSelectScreen/210322.jpg");
+		background = new FadeVideo(window, "res/generalAssets/bg.gif");
+		background.setFadeSpeed(50);
+		background.loop();
 		prev = new FadeImage("res/generalAssets/back.png");
 		cursor = RippleCursor.createLowPerformanceCursor();
-		page = 1;
-		back = new PButton(new Rectangle(0, Constants.SCREEN_HEIGHT-200, 200, Constants.SCREEN_HEIGHT), false);
+		try {
+			back = new PButton(new Rectangle(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT - Constants.scaleIntToHeight(250), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(200)),
+					new PImage(ImageIO.read(new File("res/generalAssets/back.png"))), false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		background.setCoords(0, 0);
-		prev.resize(150, 150);
-		prev.setCoords(50, Constants.SCREEN_HEIGHT-200);
 		background.resize(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-		levelButtons = new PButton[Constants.TOTAL_LEVELS];		
-
-		for(int i = 0; i < Constants.TOTAL_LEVELS; i++) {
+		prev.resize(Constants.scaleIntToWidth(150), Constants.scaleIntToWidth(150));
+		prev.setCoords(Constants.scaleIntToWidth(50), Constants.SCREEN_HEIGHT-Constants.scaleIntToHeight(200));
+		levelButtons = new PButton[Player.getLevelsUnlocked()];		
+		for(int i = 0; i < Player.getLevelsUnlocked(); i++) {
 			PButton b;
-			try {
-				b = new PButton(new Rectangle(250+((i%20%5)*300), 100+((i%20/5)*200), 200, 200),new PImage(ImageIO.read(new File("res/generalAssets/obama.png"))), false);
+			int id = i;
+			int temp = i + 1;
+ 			try {
+				b = new PButton(new Rectangle(Constants.scaleIntToWidth(250+((i%20%5)*300)), Constants.scaleIntToHeight(100+((i%20/5)*200)), Constants.scaleIntToWidth(200), Constants.scaleIntToWidth(170)),new PImage(ImageIO.read(new File("res/levelSelectScreen/numbers/"+temp+".png"))), false);
 				b.addListener(new Runnable() {
 					@Override
 					public void run() {
-						background.setFadeSpeed(40);
-						background.setTint(255);
-						background.setTargetTint(0);
-						background.fadeWhite(true);
+						if(Player.getStamina()>=10) {
+							background.setFadeSpeed(40);
+							background.setTint(255);
+							background.setTargetTint(0);
+							background.fadeWhite(true);
+							Player.setLevel(id+1);
+							background.addListener(new Runnable() {
+								@Override
+								public void run() {
+									ScreenManager.setCurrentScreenByName("prep", window);
+								}
+								
+							});
+						}else {
+							JOptionPane.showMessageDialog(null, "Not enough stamina :////");
 
-						prev.setFadeSpeed(40);
-						prev.setTint(255);
-						prev.setTargetTint(0);
-						prev.fadeWhite(true);
-						background.addListener(new Runnable() {
-							@Override
-							public void run() {
-								ScreenManager.setCurrentScreenByName("prep", window);
-							}
-							
-						});
+						}
 					}
 				});
 				levelButtons[i] = b;
@@ -74,19 +87,6 @@ public class LevelSelectScreen implements Screen {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public void draw(PApplet window) {
-		background.draw(window);
-		
-		for(int i = 20*(page-1); i < 20*page; i++) {
-			levelButtons[i].draw(window);
-		}
-		if (window.mousePressed) {
-			cursor.draw(window);
-		} else {
-			cursor.clearTrail();
-		}
 		back.addListener(new Runnable() {
 			@Override
 			public void run() {
@@ -94,10 +94,6 @@ public class LevelSelectScreen implements Screen {
 				background.setTint(255);
 				background.setTargetTint(0);
 				background.fadeWhite(true);
-				prev.setFadeSpeed(40);
-				prev.setTint(255);
-				prev.setTargetTint(0);
-				prev.fadeWhite(true);
 				background.addListener(new Runnable() {
 
 					@Override
@@ -110,9 +106,34 @@ public class LevelSelectScreen implements Screen {
 		});
 	}
 	
+	@Override
+	public void draw(PApplet window) {
+		background.draw(window);
+		back.draw(window);
+		for(int i = 0; i < levelButtons.length; i++) {
+			levelButtons[i].draw(window);
+		}
+		if (window.mousePressed) {
+			cursor.draw(window);
+		} else {
+			cursor.clearTrail();
+		}
+		window.pushStyle();
+		window.textSize(Constants.scaleIntToHeight(40));
+		window.stroke(255,0,0);
+		window.fill(255,0,0);
+		window.strokeWeight(5f);
+		window.text(String.valueOf("Stamina: " +Player.getStamina()), Constants.scaleIntToWidth(50), Constants.scaleIntToHeight(50));
+		window.popStyle();
+	}
+	
 
 	@Override
 	public void dispose() {
+		for(int i = 0; i < levelButtons.length; i++) {
+			levelButtons[i].removeListener();
+			levelButtons[i] = null;
+		}
 		background = null;
 		cursor = null;
 		back.removeListener();
